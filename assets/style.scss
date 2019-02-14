@@ -1,0 +1,15 @@
+$main-background: #F7F2EF;
+$t-font: 'Poppins', sans-serif;
+$h-font: 'Poppins', sans-serif;
+
+html, body{
+  background-color: $main-background;
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-family: $h-font;
+  font-weight: 300;
+  .text-highlight{
+    font-weight: 800;
+  }
+}

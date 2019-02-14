@@ -8,14 +8,15 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    title: 'Kmeo | Tienda de Perfumes',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Poppins:100,300,400,500,700,800' },
     ]
   },
 
@@ -27,13 +28,13 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: [
-  ],
+    css: ['uikit/dist/css/uikit.css', '@/assets/style.scss'],
 
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    { src: '~/plugins/uikit.js', ssr: false },
   ],
 
   /*
@@ -58,7 +59,7 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend(config, ctx) {
-      
+
     }
   }
 }

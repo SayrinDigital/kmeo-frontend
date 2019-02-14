@@ -1,27 +1,19 @@
 <template>
-  <section class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        kmeo
-      </h1>
-      <h2 class="subtitle">
-        Lotion ecommerce
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >GitHub</a>
-      </div>
+  <section class="uk-section uk-section-large">
+    <div class="uk-container uk-container-large">
+      <h1>Perfumes <span class="text-highlight">Santiago</span> </h1>
     </div>
+
+   <div class="uk-section uk-section-small">
+     <div class="uk-width-4-5">
+       <img uk-img src="https://images.unsplash.com/photo-1510739859545-e7b9e979de86?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80" alt="">
+     </div>
+   </div>
+
   </section>
+
+
+
 </template>
 
 <script>
