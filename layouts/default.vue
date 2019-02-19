@@ -1,8 +1,8 @@
 <template>
   <div>
-    <Navigator></Navigator>
+    <no-ssr><Navigator></Navigator></no-ssr>
     <nuxt />
-    <Footer></Footer>
+    <no-ssr><Footer></Footer></no-ssr>
   </div>
 </template>
 

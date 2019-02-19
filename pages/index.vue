@@ -3,20 +3,7 @@
   <section class="uk-section">
     <div class="uk-section uk-section-large header-container">
       <div class="uk-container uk-container-large">
-  <content-loader
-		:height="160"
-		:width="400"
-		:speed="2"
-		primaryColor="#f3f3f3"
-		secondaryColor="#ecebeb"
-    v-if="!interface"
-	>
-  <rect x="7" y="16" rx="4" ry="4" width="117" height="6.4" />
-  <rect x="5" y="42.4" rx="3" ry="3" width="210" height="3.84" />
-  <rect x="6" y="58.42" rx="3" ry="3" width="205.2" height="3.84" />
-  <rect x="7" y="73.06" rx="3" ry="3" width="144.72" height="3.84" />
-	</content-loader>
-        <div v-else>
+        <div>
           <h1 class="text-responsive">{{ interface.tituloencabezado }}</h1>
           <p class="uk-width-2-5@m uk-margin">{{ interface.descripcion }}</p>
         </div>
@@ -136,7 +123,7 @@
 <script>
 import axios from 'axios'
 import Product from '~/components/Product'
-import { ContentLoader } from 'vue-content-loader'
+
 
 export default {
   data() {
@@ -151,8 +138,7 @@ export default {
     }
   },
   components:{
-    Product,
-    ContentLoader
+    Product
   },
   beforeMount() {
     this.baseUrl = this.$axios.defaults.baseURL

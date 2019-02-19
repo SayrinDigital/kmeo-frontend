@@ -1,4 +1,5 @@
 <template>
+  <no-ssr>
 <div class="uk-background-default" v-if="product">
   <section class="header-container">
     <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
@@ -23,6 +24,7 @@
     </div>
   </section>
 </div>
+</no-ssr>
 </template>
 
 <script>

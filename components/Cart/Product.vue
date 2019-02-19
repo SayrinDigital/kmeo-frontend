@@ -1,5 +1,6 @@
 <template>
 
+<no-ssr>
   <div class="uk-position-relative product-container">
       <div class="uk-position-relative">
         <img v-if="product.imagen" :src="baseUrl + product.imagen.url" uk-img alt="">
@@ -24,7 +25,7 @@
           <button type="button" class="uk-button danger-button" @click="removeFromCart(product)"><span class="uk-icon" uk-icon="icon: trash"></span></button>
     </div>
   </div>
-
+</no-ssr>
 </template>
 
 <script>
