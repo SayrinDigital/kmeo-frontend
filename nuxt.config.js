@@ -16,7 +16,7 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Poppins:100,300,400,500,700,800' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700|Work+Sans:400,800' },
     ]
   },
 
@@ -34,7 +34,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~/plugins/uikit.js', ssr: false },
+    { src: '~/plugins/uikit.js', ssr: false },{ src: '~/plugins/vue-filters.js', ssr: false },
   ],
 
   /*
@@ -48,6 +48,7 @@ module.exports = {
   ** Axios module configuration
   */
   axios: {
+    baseURL: 'http://localhost:1337'
     // See https://github.com/nuxt-community/axios-module#options
   },
 

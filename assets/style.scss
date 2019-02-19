@@ -1,15 +1,259 @@
+@font-face {
+ font-family: 'Apercu Bold';
+ src: url('/fonts/apercu_bold_pro.otf');
+ font-weight: normal;
+ font-style: normal;
+}
+
+@font-face {
+ font-family: 'Apercu Regular';
+ src: url('/fonts/apercu_regular_pro.otf');
+ font-weight: normal;
+ font-style: normal;
+}
+
+.header-container{
+  margin-top: -80px;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
+.tiny-text{
+  font-size: 10px;
+}
+
 $main-background: #F7F2EF;
-$t-font: 'Poppins', sans-serif;
-$h-font: 'Poppins', sans-serif;
+$h-font: 'Apercu Bold', sans-serif;
+$t-font: 'Apercu Regular', sans-serif;
+$accent-color: #BFC2F1;
+$h-color: #333333;
+$t-color: #5c5c5c;
 
 html, body{
   background-color: $main-background;
 }
 
+.uk-navbar-container.active-sticky{
+  background: $main-background;
+}
+
+.background-soft{
+  background-color: #FCE4DD;
+}
+
+.background-blue{
+  background-color: #ECFCFF;
+}
+
+.background-green{
+  background-color: #E7F9E7;
+}
+
+.imagen-link-container{
+  width: 100%;
+  height: 100%;
+  display: block;
+  img{
+    width: 100%!important;
+    height: 100%!important;
+  }
+}
+
+.faq-list{
+  li{
+    a{
+      font-family: $h-font;
+      font-size: 22px;
+      padding: 30px 20px;
+      background: #fff;
+
+    }
+    .uk-accordion-content{
+
+    }
+  }
+}
+
+.payment-gate{
+  li{
+    margin: 10px 20px;
+    &.uk-active{
+      a{
+          border-color: $accent-color;
+          color: $accent-color;
+      }
+    }
+    a{
+      border: 1px solid $t-color;
+      padding: 40px 20px;
+      text-align: center;
+      color: $t-color;
+      font-family: $h-font;
+      text-transform: capitalize;
+      &:focus{
+        border-color: $accent-color;
+        color: $accent-color;
+      }
+    }
+  }
+}
+
+.uk-navbar-item{
+  a{
+    font-family: $t-font;
+    font-size: 18px;
+  }
+}
+
+@keyframes addToCartAnimation{
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(2);
+  }
+  100%{
+    transform: scale(1)
+  }
+}
+
+
+.quantity-container{
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  transform:  scale(1);
+  transition: all 200ms ease-in-out;
+  animation: addToCartAnimation 2s infinite;
+  .quantity-cart{
+    width: 20px;
+    height: 20px;
+    background-color: $accent-color;
+    border-radius: 50%;
+    padding: 0px;
+    p{
+      color: #fff;
+      font-size: 12px;
+    }
+  }
+}
+
+
+a:hover, a:focus{
+  text-decoration: none;
+}
+
 h1,h2,h3,h4,h5,h6{
   font-family: $h-font;
-  font-weight: 300;
+  font-weight: 400;
+  color: $h-color;
+  margin: 0;
   .text-highlight{
-    font-weight: 800;
+    font-weight: 900;
+  }
+  &.text-responsive{
+      font-size: calc(4.273vw + 20.72727px);
+  }
+}
+
+.link-container{
+  background: $accent-color;
+  padding: 40px 60px;
+  margin-top: -50px;
+  a{
+    color: #fff;
+    font-weight: 400;
+    font-family: $t-font;
+    font-size: 18px;
+    &:hover{
+      color: #fff;
+    }
+    &.uk-button-text::before{
+      border-bottom: 1px solid #fff;
+    }
+  }
+}
+
+p{
+  font-family: $t-font;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 30px;
+  margin: 0;
+  color: $t-color;
+  .text-bold{
+    font-family: $h-font;
+  }
+}
+
+input.uk-input{
+  border: 1px solid $t-color;
+  color: $t-color;
+  font-family: $t-font;
+  &:focus{
+    border-color: $accent-color;
+  }
+}
+
+button.uk-button{
+  &.style-a{
+    background-color: $accent-color;
+    font-family: $t-font;
+    color: #fff;
+    text-transform: capitalize;
+    font-size: 18px;
+  }
+  &.action-button{
+    background: #a4caf1;
+    color: #fff;
+  }
+  &.danger-button{
+    background: #eba9d6;
+    color: #fff;
+  }
+}
+
+.arrows-sliders-a{
+  background: #fff;
+  transition: all 200ms ease-in-out;
+  a{
+    color: $t-color!important;
+  }
+}
+
+.say-padding-left-container {
+    padding-left: calc((100vw - 1700px)/2);
+}
+
+.category-container{
+  .badge-container{
+    background: $accent-color;
+    padding: 10px 20px;
+    p{
+      color: #fff;
+      font-size: 18px;
+    }
+  }
+}
+
+.product-container{
+  .badge-container{
+    background: $accent-color;
+    padding: 10px 20px;
+    p{
+      color: #fff;
+      font-size: 18px;
+    }
+  }
+}
+
+footer{
+  .left-container{
+    background-color: $accent-color;
+    h1,p{
+      color: #fff;
+    }
   }
 }
