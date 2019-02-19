@@ -7,6 +7,7 @@
         <div class="uk-container uk-container-large">
           <p class="uk-width-2-5@m">Categorías</p>
           <h1 v-if="category" class="text-responsive">{{ category.nombre }}</h1>
+          <p v-if="category" class="uk-margin-top uk-width-2-5@m">{{ category.descripcion }}</p>
         </div>
       </div>
     </div>
@@ -16,7 +17,7 @@
     <div class="uk-container uk-container-large">
 
       <div uk-grid>
-        <div class="uk-width-1-5">
+        <div class="uk-width-1-5@m">
           <div>
             <h1 class="uk-text-capitalize"><span class="text-highlight">Filtrar</span></h1>
             <p class="uk-text-capitalize uk-width-large@m uk-margin">Ajusta el buscador en base a tus necesidades.</p>
@@ -37,13 +38,13 @@
           </div>
 
         </div>
-        <div class="uk-width-4-5">
+        <div class="uk-width-4-5@m">
           <div>
             <h1 class="uk-text-capitalize"><span class="text-highlight">últimos Productos</span></h1>
             <p class="uk-text-capitalize uk-width-large@m uk-margin">Encuentra el producto a tu medida.</p>
           </div>
           <div class="uk-section">
-            <div class="uk-grid-medium uk-child-width-1-4" uk-scrollspy="cls: uk-animation-fade; target: > div > .product-container; delay: 400; repeat: true" uk-grid>
+            <div class="uk-grid-medium uk-child-width-1-4@l uk-child-width-1-3@m uk-child-width-1-2@s uk-child-width-1-1" uk-scrollspy="cls: uk-animation-fade; target: > div > .product-container; delay: 400; repeat: true" uk-grid>
               <div v-for="product in filteredProducts" :key="category.producto.id">
                 <Product :product="product"></Product>
               </div>

@@ -19,7 +19,7 @@
           <h1 class="uk-text-capitalize"><span class="text-highlight">Tienes {{ numberOfItems }} Productos</span></h1>
           <p class="uk-text-capitalize uk-width-large@m uk-margin">Revisa tu lista de compras antes de proceder a pagar.</p>
           <div class="uk-margin">
-            <button class="uk-button uk-button-large style-a" type="button" @click="uploadOrder()">Generar Compra</button>
+            <button class="uk-button uk-button-large style-a" type="button" @click="uploadOrder()">Generar Orden</button>
           </div>
         </div>
         <div class="uk-section">
@@ -70,24 +70,7 @@ export default {
   },
   methods: {
     uploadOrder(){
-      axios
-        .post(this.baseUrl + "/ordens/", {
-          nombre: this.name,
-          email: this.email,
-          telefono: this.phone,
-          direccion: this.address,
-          despachorapido: this.fastsent,
-          total: this.$store.getters['cart/price'],
-          productos: this.$store.getters['cart/items']
-        })
-        .then(response => {
-          // Handle success.
-          this.$router.push('/carro/checkout')
-        })
-        .catch(error => {
-          // Handle error.
-          console.log('An error occurred:', error);
-        });
+      this.$router.push('/carro/checkout')
     },
   }
 

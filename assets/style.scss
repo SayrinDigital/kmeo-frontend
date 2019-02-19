@@ -24,6 +24,20 @@
   font-size: 10px;
 }
 
+.text-strike{
+  text-decoration: line-through;
+  font-size: 12px;
+}
+
+.uk-navbar-item{
+  a{
+    color: #acacac;
+    &.nuxt-link-exact-active.nuxt-link-active{
+      color: #333;
+    }
+  }
+}
+
 $main-background: #F7F2EF;
 $h-font: 'Apercu Bold', sans-serif;
 $t-font: 'Apercu Regular', sans-serif;
@@ -34,6 +48,18 @@ $t-color: #5c5c5c;
 html, body{
   background-color: $main-background;
 }
+
+.uk-search-input{
+  font-family: $t-font;
+}
+
+#nav-mobile{
+  a{
+    font-family: $t-font;
+    font-size: 16px;
+  }
+}
+
 
 .uk-navbar-container.active-sticky{
   background: $main-background;

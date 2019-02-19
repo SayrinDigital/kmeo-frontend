@@ -57,7 +57,7 @@
 
 
                 <div class="uk-margin uk-text-right">
-                  <button class="uk-button uk-button-large style-a" type="button" @click="Pay">Ir a Pagar</button>
+                  <button class="uk-button uk-button-large style-a" type="button" @click="generatePayment()">Ir a Pagar</button>
                   <p class="tiny-text">Pagar por Webpay tiene un recargo de +6%.</p>
                 </div>
 
@@ -166,6 +166,28 @@ export default {
      .catch(error => {
 
      })
+   },
+
+   generatePayment(){
+     axios
+       .post(this.baseUrl + "/ordens/", {
+         nombre: this.name,
+         email: this.email,
+         telefono: this.phone,
+         direccion: this.address,
+         despachorapido: this.fastsent,
+         total: this.$store.getters['cart/price'],
+         productos: this.$store.getters['cart/items'],
+         estado: "Orden Generada"
+       })
+       .then(response => {
+         // Handle success.
+         this.Pay()
+       })
+       .catch(error => {
+         // Handle error.
+         console.log('An error occurred:', error);
+       });
    },
 
     Pay(){

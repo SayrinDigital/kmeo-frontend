@@ -12,7 +12,8 @@
     <div class="uk-margin-top uk-margin-bottom">
       <h3>{{ product.nombre }}</h3>
       <h5 v-if="product.marca">{{ product.marca.nombre }}</h5>
-      <p>{{ product.preciofinal | currency('$', 0) }} CLP</p>
+      <p class="text-strike">{{ product.precioreferencial | currency('$', 0) }} CLP</p>
+      <h4>{{ product.preciofinal | currency('$', 0) }} CLP</h4>
     </div>
   </div>
 
@@ -35,7 +36,6 @@ export default {
   computed:{
      discountPercetange: function(){
        var decrease = this.$props.product.precioreferencial - this.$props.product.preciofinal
-       console.log(decrease)
        return Math.round((decrease / this.$props.product.precioreferencial) * 100)
      }
   }

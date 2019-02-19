@@ -3,8 +3,23 @@
   <section class="uk-section">
     <div class="uk-section uk-section-large header-container">
       <div class="uk-container uk-container-large">
-        <h1 class="text-responsive">{{ interface.tituloencabezado }}</h1>
-        <p class="uk-width-2-5@m uk-margin">{{ interface.descripcion }}</p>
+  <content-loader
+		:height="160"
+		:width="400"
+		:speed="2"
+		primaryColor="#f3f3f3"
+		secondaryColor="#ecebeb"
+    v-if="!interface"
+	>
+  <rect x="7" y="16" rx="4" ry="4" width="117" height="6.4" />
+  <rect x="5" y="42.4" rx="3" ry="3" width="210" height="3.84" />
+  <rect x="6" y="58.42" rx="3" ry="3" width="205.2" height="3.84" />
+  <rect x="7" y="73.06" rx="3" ry="3" width="144.72" height="3.84" />
+	</content-loader>
+        <div v-else>
+          <h1 class="text-responsive">{{ interface.tituloencabezado }}</h1>
+          <p class="uk-width-2-5@m uk-margin">{{ interface.descripcion }}</p>
+        </div>
       </div>
     </div>
 
@@ -29,7 +44,7 @@
 
             </div>
             <div class="uk-position-top-left link-container uk-width-4-5@m uk-text-right">
-              <a class="uk-button-text" href="">Conóce lo último en nuestro catálogo <span class="uk-icon uk-margin-small-left" uk-icon="icon: arrow-right;"></span> </a>
+              <nuxt-link class="uk-button-text" to="/faq">Visíta nuestra seccion de preguntas y respuestas. <span class="uk-icon uk-margin-small-left" uk-icon="icon: arrow-right;"></span> </nuxt-link>
             </div>
           </div>
         </div>
@@ -53,7 +68,7 @@
             </div>
           </div>
           <div class="uk-width-3-5@m">
-            <div>
+            <div class="uk-container">
               <div class="uk-position-relative uk-visible-toggle" tabindex="-1" uk-slider>
 
                 <ul class="uk-slider-items uk-grid" v-if="hlcategory.producto">
@@ -78,7 +93,7 @@
         <div class="uk-section">
           <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider>
 
-            <ul class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@m uk-grid">
+            <ul class="uk-slider-items uk-child-width-1-2@s uk-child-width-1-1 uk-child-width-1-3@m uk-grid">
               <li v-for="category in categories" :key="category.id">
                 <nuxt-link tag="div" :to="{ name: 'categorias-id', params: { id: category.id }}" class="uk-panel cursor-pointer category-container">
                   <img v-if="category.imagen" :src="baseUrl + category.imagen.url" alt="">
@@ -121,6 +136,7 @@
 <script>
 import axios from 'axios'
 import Product from '~/components/Product'
+import { ContentLoader } from 'vue-content-loader'
 
 export default {
   data() {
@@ -135,7 +151,8 @@ export default {
     }
   },
   components:{
-    Product
+    Product,
+    ContentLoader
   },
   beforeMount() {
     this.baseUrl = this.$axios.defaults.baseURL

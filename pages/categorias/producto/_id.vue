@@ -5,21 +5,12 @@
       <div class="uk-background-cover" v-if="product.imagen" uk-img :data-src="baseUrl + product.imagen.url" uk-height-viewport></div>
       <div class="uk-padding-large">
         <div class="uk-width-3-5@m uk-margin-auto">
-          <!--<h1>{{ product.nombre }} | Detalles</h1>
-          <p class="uk-margin">{{ product.detalles }}</p>
-          <p class="uk-margin"><span class="text-bold">Precio:</span> ${{ product.precio }} CLP</p>-->
+
           <h1>{{ product.nombre }} | Detalles</h1>
           <p class="uk-margin">{{ product.descripcion }}</p>
           <p class="uk-margin"><span class="text-bold">Precio:</span> {{ product.preciofinal | currency('$', 0) }} CLP</p>
           <hr class="uk-hr">
           <form class="uk-form-stacked uk-text-right">
-
-            <!--<div class="uk-margin">
-              <h3>Cantidad</h3>
-              <div class="uk-form-controls">
-                <input class="uk-input uk-form-width-small" min="1" id="form-stacked-text" type="number" placeholder="10">
-              </div>
-            </div>-->
 
             <div class="uk-margin">
               <button class="uk-button uk-button-large style-a" @click="addToCart(product)" type="button">Agregar al Carro</button>
@@ -52,9 +43,6 @@ export default {
     this.loadProduct()
   },
   computed: {
-   id() {
-     return this.$route.params.id
-   },
    dishes() {
      return this.$store.getters['dishes/list']
    },
