@@ -20,6 +20,7 @@
           <p class="uk-text-capitalize uk-width-large@m uk-margin">Revisa tu lista de compras antes de proceder a pagar.</p>
           <div class="uk-margin">
             <button class="uk-button uk-button-large style-a" type="button" @click="uploadOrder()">Generar Orden</button>
+            <button class="uk-button uk-button-large style-a danger-button" type="button" @click="emptyCart()">Vaciar Carro</button>
           </div>
         </div>
         <div class="uk-section">
@@ -41,7 +42,7 @@
 
 import Product from '~/components/Cart/Product'
 import axios from 'axios'
-
+import { mapMutations } from 'vuex'
 
 export default {
 
@@ -72,6 +73,9 @@ export default {
     uploadOrder(){
       this.$router.push('/carro/checkout')
     },
+    ...mapMutations({
+   emptyCart: 'cart/emptyList'
+ })
   }
 
 }

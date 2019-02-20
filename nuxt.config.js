@@ -1,5 +1,5 @@
 const pkg = require('./package')
-
+import axios from 'axios'
 
 module.exports = {
   mode: 'universal',
@@ -15,7 +15,7 @@ module.exports = {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/png', href: '/favicon.png' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700|Work+Sans:400,800' },
     ]
   },
@@ -23,7 +23,7 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  loading: false,
 
   /*
   ** Global CSS
@@ -34,7 +34,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~/plugins/uikit.js', ssr: false },{ src: '~/plugins/vue-filters.js', ssr: false },
+    { src: '~/plugins/uikit.js', ssr: false },{ src: '~/plugins/vue-filters.js', ssr: true }, { src: '~/plugins/vue-js-modal.js'}
   ],
 
   /*
@@ -48,8 +48,19 @@ module.exports = {
   ** Axios module configuration
   */
   axios: {
-    baseURL: 'https://www.say.kmeo.cl'
+    baseURL: 'https://say.kmeo.cl'
     // See https://github.com/nuxt-community/axios-module#options
+  },
+
+  generate: {
+    routes: function () {
+      return axios.get('https://say.kmeo.cl/categorias')
+      .then((res) => {
+        return res.data.map((categoria) => {
+          return '/categorias/' + categoria.id
+        })
+      })
+    }
   },
 
   /*

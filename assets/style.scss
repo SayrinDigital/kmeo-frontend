@@ -20,9 +20,19 @@
   cursor: pointer;
 }
 
+.responsive-heightport{
+  min-height: 100vh;
+}
+
 .tiny-text{
   font-size: 10px;
 }
+
+img[data-src][src*='data:image'] {
+  background: rgba(0,0,0,0.1);
+  height: 500px;
+  width: 500px;
+ }
 
 .text-strike{
   text-decoration: line-through;
@@ -282,4 +292,16 @@ footer{
       color: #fff;
     }
   }
+}
+
+@media only screen and (max-width: 600px) {
+  .link-container{
+    padding: 10px 20px;
+  }
+
+  .responsive-heightport{
+    height: 300px;
+    min-height: 300px;
+  }
+
 }

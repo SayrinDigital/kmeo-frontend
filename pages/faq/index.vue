@@ -37,6 +37,15 @@
 import axios from 'axios'
 
 export default {
+  head () {
+  return {
+    title: 'FAQ | Kmeo',
+    meta: [
+      // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+      { hid: 'description', name: 'description', content: 'Resuelva las dudas más comunes que podría llegar a tener con nuestro portal.' }
+    ]
+  }
+},
   data() {
     return {
       faqs: []

@@ -1,6 +1,7 @@
 <template>
 <div v-if="category">
 
+<demo-adaptive-modal/>
   <section class="uk-section header-container  uk-width-4-5@m background-soft" :Style=" 'background-color: ' +category.color+ ';' ">
     <div class="uk-section uk-section-large">
       <div class="say-padding-left-container">
@@ -44,7 +45,7 @@
             <p class="uk-text-capitalize uk-width-large@m uk-margin">Encuentra el producto a tu medida.</p>
           </div>
           <div class="uk-section">
-            <div class="uk-grid-medium uk-child-width-1-4@l uk-child-width-1-3@m uk-child-width-1-2@s uk-child-width-1-1" uk-scrollspy="cls: uk-animation-fade; target: > div > .product-container; delay: 400; repeat: true" uk-grid>
+            <div class="uk-grid uk-grid-medium uk-child-width-1-4@l uk-child-width-1-3@m uk-child-width-1-2@s uk-child-width-1-1" uk-scrollspy="cls: uk-animation-fade; target: > div > .product-container; delay: 400; repeat: true" uk-grid>
               <div v-for="product in filteredProducts" :key="category.producto.id">
                 <Product :product="product"></Product>
               </div>
@@ -61,25 +62,33 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '~/plugins/axios'
 import Product from '~/components/Product'
+import DemoAdaptiveModal  from '~/components/ModalProduct'
 
 export default {
   data() {
     return {
       category: null,
       products: [],
-      baseUrl: "",
+      baseUrl: "https://say.kmeo.cl",
       id: null,
       brands: [],
       filterbrand: "Todas"
     }
   },
-  beforeMount() {
-    this.baseUrl = this.$axios.defaults.baseURL
-  },
+  head () {
+  return {
+    title: this.category.nombre + ' | Kmeo',
+    meta: [
+      // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+      { hid: 'description', name: 'description', content: this.category.descripcion }
+    ]
+  }
+},
   components: {
-    Product
+    Product,
+    DemoAdaptiveModal
   },
   computed: {
      filteredProducts: function(){
@@ -98,12 +107,16 @@ export default {
         }
      }
   },
-  mounted() {
+  beforeMount() {
     this.id = this.$route.params.id
-    //this.loadProducts()
-    this.loadCategory()
     this.loadBrands()
   },
+  asyncData ({ params }) {
+  return axios.get('/categorias/' + params.id)
+  .then((res) => {
+    return { category: res.data }
+  })
+},
   methods: {
 
     loadBrands: function(){
@@ -120,19 +133,6 @@ export default {
         })
     },
 
-    loadCategory: function() {
-      axios
-        .get(this.baseUrl + '/categorias/' + this.id)
-        .then(response => {
-          // Handle success.
-          //console.log('Well done, here is the list of posts: ', response.data);
-          this.category = response.data
-        })
-        .catch(error => {
-          // Handle error.
-          console.log('An error occurred:', error);
-        });
-    },
   },
 }
 </script>

@@ -1,11 +1,13 @@
 <template>
-<div>
+<div >
+
+   <demo-adaptive-modal/>
   <section class="uk-section">
     <div class="uk-section uk-section-large header-container">
       <div class="uk-container uk-container-large">
         <div>
-          <h1 class="text-responsive">{{ interface.tituloencabezado }}</h1>
-          <p class="uk-width-2-5@m uk-margin">{{ interface.descripcion }}</p>
+          <h1 class="text-responsive">{{ interfaces.tituloencabezado }}</h1>
+          <p class="uk-width-2-5@m uk-margin">{{ interfaces.descripcion }}</p>
         </div>
       </div>
     </div>
@@ -14,12 +16,12 @@
       <div uk-grid>
         <div class="uk-width-4-5@m">
           <div class="uk-position-relative">
-            <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="autplay: true; autoplay-interval: 2000">
+            <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="autoplay: true; autoplay-interval: 2000">
 
               <ul class="uk-slideshow-items">
                 <li v-for="header in headers">
-                  <a :href="header.link" class="imagen-link-container">
-                     <img v-if="header.imagen" :src="baseUrl + header.imagen.url" alt="" uk-cover>
+                  <a :href="header.link"  class="imagen-link-container">
+                     <img v-if="header.imagen" uk-img :src="baseUrl + header.imagen.url" alt="" uk-cover>
                   </a>
                 </li>
               </ul>
@@ -30,7 +32,7 @@
               </div>
 
             </div>
-            <div class="uk-position-top-left link-container uk-width-4-5@m uk-text-right">
+            <div class="uk-position-top-left link-container uk-width-4-5@m uk-text-right@m uk-text-left">
               <nuxt-link class="uk-button-text" to="/faq">Visíta nuestra seccion de preguntas y respuestas. <span class="uk-icon uk-margin-small-left" uk-icon="icon: arrow-right;"></span> </nuxt-link>
             </div>
           </div>
@@ -83,7 +85,10 @@
             <ul class="uk-slider-items uk-child-width-1-2@s uk-child-width-1-1 uk-child-width-1-3@m uk-grid">
               <li v-for="category in categories" :key="category.id">
                 <nuxt-link tag="div" :to="{ name: 'categorias-id', params: { id: category.id }}" class="uk-panel cursor-pointer category-container">
-                  <img v-if="category.imagen" :src="baseUrl + category.imagen.url" alt="">
+                  <div class="uk-inline-clip uk-transition-toggle" tabindex="0">
+           <img  class="uk-transition-scale-up uk-transition-opaque"  v-if="category.imagen" :src="baseUrl + category.imagen.url" alt="">
+       </div>
+
                   <div class="uk-position-bottom-left uk-panel">
                     <div class="badge-container">
                       <p>{{ category.nombre }}</p>
@@ -105,7 +110,7 @@
           <p class="uk-text-capitalize uk-width-large@m uk-margin">Encuentra el producto a tu medida.</p>
         </div>
         <div class="uk-section">
-          <div class="uk-grid-medium uk-child-width-1-4@l uk-child-width-1-3@m uk-child-width-1-2@s uk-child-width-1-1" uk-scrollspy="cls: uk-animation-fade; target: > div > .product-container; delay: 400; repeat: true" uk-grid>
+          <div class="uk-grid uk-grid-medium uk-child-width-1-4@l uk-child-width-1-3@m uk-child-width-1-2" uk-scrollspy="cls: uk-animation-fade; target: > div > .product-container; delay: 400; repeat: true" uk-grid>
             <div v-for="product in products" :key="product.id">
               <Product :product="product"></Product>
             </div>
@@ -121,135 +126,62 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '~/plugins/axios'
 import Product from '~/components/Product'
-
+import DemoAdaptiveModal  from '~/components/ModalProduct'
 
 export default {
   data() {
     return {
-      categories: [],
-      headers: [],
-      baseUrl: "",
-      interface: "",
-      products: [],
-      hlcategory: null,
-      hlproducts: []
+       baseUrl: "https://say.kmeo.cl/",
     }
   },
   components:{
-    Product
+    Product,
+    DemoAdaptiveModal
   },
-  beforeMount() {
-    this.baseUrl = this.$axios.defaults.baseURL
-  },
-  mounted() {
-    this.loadContent()
-    this.loadCategories()
-    this.loadHeaders()
-    this.loadProducts()
-    this.loadHlCategory()
-  },
-  methods: {
-    loadContent: function() {
-      axios
-        .get(this.baseUrl + '/interfazs',{
-          params:{
-            _limit: 1
-          }
-        })
-        .then(response => {
-          // Handle success.
-          //console.log('Well done, here is the list of posts: ', response.data);
-          this.interface = response.data[0]
-        })
-        .catch(error => {
-          // Handle error.
-          console.log('An error occurred:', error);
-        });
-    },
-    loadHeaders: function() {
-      axios
-        .get(this.baseUrl + '/encabezados')
-        .then(response => {
-          // Handle success.
-          //console.log('Well done, here is the list of posts: ', response.data);
-          this.headers = response.data
-        })
-        .catch(error => {
-          // Handle error.
-          console.log('An error occurred:', error);
-        });
-    },
-    loadCategories: function() {
-      axios
-        .get(this.baseUrl + '/categorias')
-        .then(response => {
-          // Handle success.
-          //console.log('Well done, here is the list of posts: ', response.data);
-          this.categories = response.data
-          console.log(response.data[0])
-        })
-        .catch(error => {
-          // Handle error.
-          console.log('An error occurred:', error);
-        });
-    },
-    loadProducts: function() {
-      axios
-        .get(this.baseUrl + '/productos/',{
-          params: {
-            _limit: 20,
-            _sort: "id:DESC"
-          }
-        })
-        .then(response => {
-          // Handle success.
-          //console.log('Well done, here is the list of posts: ', response.data);
-          this.products = response.data
-        })
-        .catch(error => {
-          // Handle error.
-          console.log('An error occurred:', error);
-        });
-    },
-    loadHlCategory: function(){
-      axios
-        .get(this.baseUrl + '/categorias', {
-          params:{
-            "nombre": "Destacados"
-          }
-        })
-        .then(response => {
-          // Handle success.
-          //console.log('Well done, here is the list of posts: ', response.data);
-          //console.log(response.data[0])
-          this.hlcategory = response.data[0]
-        })
-        .catch(error => {
-          // Handle error.
-          console.log('An error occurred:', error);
-        });
-    },
-    loadHlProducts: function(hlcategory){
-      axios
-        .get(this.baseUrl + '/productos/',{
-          params: {
-            categoria: hlcategory.id,
-          }
-        })
-        .then(response => {
-          // Handle success.
-          //console.log('Well done, here is the list of posts: ', response.data);
-          this.hlproducts = response.data
-          //console.log(response.data)
-        })
-        .catch(error => {
-          // Handle error.
-          console.log('An error occurred:', error);
-        });
-    }
+  async asyncData({ params }) {
+    // We can use async/await ES6 feature
+    const interfaces = await axios.get(
+      '/interfazs',{
+        params: {
+          _limit: 1
+        }
+      }
+    );
+    const headers = await axios.get(
+      '/encabezados'
+    );
 
+    const products = await axios.get(
+      '/productos/',{
+        params: {
+          _limit: 20,
+          _sort: "id:DESC"
+        }
+      }
+    );
+
+    const categories = await axios.get(
+      '/categorias'
+    );
+
+    const hlcategory = await axios.get(
+      '/categorias',{
+        params: {
+          nombre: "Destacados"
+        }
+      }
+    );
+
+    return {
+       interfaces: interfaces.data[0],
+       headers: headers.data,
+       products: products.data,
+       categories: categories.data,
+       hlcategory: hlcategory.data[0],
+       hlproducts: hlcategory.data.producto
+         };
   },
 }
 </script>

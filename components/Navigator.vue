@@ -96,14 +96,12 @@ export default {
     return {
       categories: [],
       headers: [],
-      baseUrl: "",
+      baseUrl: "https://say.kmeo.cl",
       interface: "",
       search: ""
     }
   },
-  beforeMount() {
-    this.baseUrl = this.$axios.defaults.baseURL
-  },
+
   mounted() {
     this.loadCategories()
   },
