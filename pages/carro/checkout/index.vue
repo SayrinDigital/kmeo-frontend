@@ -16,7 +16,7 @@
             </div>
 
             <div class="uk-section uk-section-small">
-              <form class="uk-form-stacked" @submit.stop.prevent="uploadOrder">
+              <form class="uk-form-stacked" @submit.stop.prevent="generatePayment()">
 
                 <div class="uk-margin">
                   <h4 class="uk-form-label" for="form-stacked-text">Nombre</h4>
@@ -57,7 +57,7 @@
 
 
                 <div class="uk-margin uk-text-right">
-                  <button class="uk-button uk-button-large style-a" type="button" @click="generatePayment()">Ir a Pagar</button>
+                  <div v-if="isprocessingpayment" uk-spinner></div><button class="uk-margin-small-left uk-button uk-button-large style-a" type="submit">Ir a Pagar</button>
                   <p class="tiny-text">Pagar por Webpay tiene un recargo de +6%.</p>
                 </div>
 
@@ -70,7 +70,8 @@
 
       </div>
       <div class="uk-flex-first">
-        <div class="uk-padding-small">
+        <div class="uk-section uk-section-large">
+          <div class="uk-container">
           <div class="uk-width-4-5@m uk-margin-auto">
             <h1>Medios de Pago</h1>
             <p class="uk-margin">Seleccione el medio de pago que más le acomode.</p>
@@ -82,9 +83,9 @@
                   <ul class="uk-tab-left payment-gate" uk-tab="connect: #component-tab-left; animation: uk-animation-fade">
                     <li v-for="pay in paymentmethods">
                       <a href="#">
-<span v-if="pay.nombre == 'Webpay'" class="uk-icon uk-margin-small-right" uk-icon="icon: credit-card"></span>
-<span v-if="pay.nombre == 'Caja Vecina'" class="uk-icon uk-margin-small-right" uk-icon="icon: home"></span>
-<span v-if="pay.nombre == 'Transferencia'" class="uk-icon uk-margin-small-right" uk-icon="icon: laptop"></span>
+                        <span v-if="pay.nombre == 'Webpay'" class="uk-icon uk-margin-small-right" uk-icon="icon: credit-card"></span>
+                        <span v-if="pay.nombre == 'Caja Vecina'" class="uk-icon uk-margin-small-right" uk-icon="icon: home"></span>
+                        <span v-if="pay.nombre == 'Transferencia'" class="uk-icon uk-margin-small-right" uk-icon="icon: laptop"></span>
                         {{ pay.nombre }}</a>
                     </li>
                   </ul>
@@ -102,6 +103,7 @@
               </div>
             </div>
 
+          </div>
           </div>
         </div>
       </div>
@@ -125,7 +127,8 @@ export default {
       address: "",
       fastsent: false,
       despacho: null,
-      paymentmethods: []
+      paymentmethods: [],
+      isprocessingpayment: false,
     }
   },
   beforeMount() {
@@ -142,6 +145,10 @@ export default {
     }
   },
   methods: {
+
+    teststore(){
+                 this.$store.commit('order/add', 3090)
+    },
 
    loadDespacho(){
      axios
@@ -168,6 +175,7 @@ export default {
    },
 
    generatePayment(){
+     this.isprocessingpayment = true
      axios
        .post(this.baseUrl + "/ordens/", {
          nombre: this.name,
@@ -181,29 +189,37 @@ export default {
        })
        .then(response => {
          // Handle success.
-         this.Pay()
+         this.Pay(response.data.id)
        })
        .catch(error => {
          // Handle error.
+         this.isprocessingpayment = false
          console.log('An error occurred:', error);
        });
    },
 
-    Pay(){
+    Pay(orderId){
 
       var price = this.$store.getters['cart/price']
-
-      var totalprice = (price * 0.06) + price + this.despacho.precio
+      var tax = 0
+      if(this.fastsent){
+        tax = this.despacho.precio
+      }
+      var totalprice = (price * 0.06) + price + tax
 
       axios
-      .post('https://flow.privadosvip.cl/flow/examples/payments/create.php',{
+      .post('https://kmeo.cl/flow/examples/payments/create.php',{
+        orderId: orderId,
         email: this.email,
         total: totalprice,
         productos: this.productos
       })
       .then(response => {
+        this.isprocessingpayment = false
           var order = response.data
           if(order.url && this.despacho){
+            console.log(order)
+                        this.$store.commit('order/add', orderId)
           window.location.href = order.url + "?token=" + order.token
         }
       })
