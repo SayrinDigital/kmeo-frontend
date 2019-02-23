@@ -1,7 +1,7 @@
 <template>
-<div >
+<div>
 
-   <demo-adaptive-modal/>
+  <demo-adaptive-modal />
   <section class="uk-section">
     <div class="uk-section uk-section-large header-container">
       <div class="uk-container uk-container-large">
@@ -20,8 +20,8 @@
 
               <ul class="uk-slideshow-items">
                 <li v-for="header in headers">
-                  <a :href="header.link"  class="imagen-link-container">
-                     <img v-if="header.imagen" uk-img :src="baseUrl + header.imagen.url" alt="" uk-cover>
+                  <a :href="header.link" class="imagen-link-container">
+                    <img v-if="header.imagen" uk-img :src="baseUrl + header.imagen.url" alt="" uk-cover>
                   </a>
                 </li>
               </ul>
@@ -72,46 +72,51 @@
       </div>
     </section>
 
-    <section class="uk-section uk-section-large">
+
+    <section class="uk-section uk-background-cover"  id="categories-section" uk-img data-src="/assets/bg-a.svg">
 
       <div class="uk-container uk-container-large">
-        <div>
-          <h1><span class="text-highlight">Categorías</span></h1>
-          <p class="uk-text-capitalize uk-width-large@m uk-margin">Encuentra el producto a tu medida.</p>
-        </div>
-        <div class="uk-section">
-          <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider>
 
-            <ul class="uk-slider-items uk-child-width-1-2@s uk-child-width-1-1 uk-child-width-1-3@m uk-grid">
-              <li v-for="category in categories" :key="category.id">
-                <nuxt-link tag="div" :to="{ name: 'categorias-id', params: { id: category.id }}" class="uk-panel cursor-pointer category-container">
-                  <div class="uk-inline-clip uk-transition-toggle" tabindex="0">
-           <img  class="uk-transition-scale-up uk-transition-opaque"  v-if="category.imagen" :src="baseUrl + category.imagen.url" alt="">
-       </div>
-
-                  <div class="uk-position-bottom-left uk-panel">
-                    <div class="badge-container">
-                      <p>{{ category.nombre }}</p>
-                    </div>
-                  </div>
-                </nuxt-link>
-              </li>
-            </ul>
+        <div class=" uk-section">
+          <div class="uk-container">
+            <h1><span class="text-highlight">Categorías</span></h1>
+            <p class="uk-text-capitalize uk-width-large@m uk-margin">Encuentra el producto a tu medida.</p>
           </div>
         </div>
-      </div>
+
+    </div>
+
+       <div class="uk-container">
+
+        <div class="uk-section" >
+          <div class="uk-position-relative uk-visible-toggle " tabindex="-1">
+            <div uk-scrollspy="cls: uk-animation-slide-bottom-small; target: > div > div ; delay: 200;" class="uk-child-width-1-2@m uk-grid-medium uk-grid" uk-grid>
+                  <Category v-for="category in categories" :key="category.id" :category="category"></Category>
+             </div>
+          </div>
+        </div>
+
+        </div>
 
     </section>
 
-    <section class="uk-section uk-section-large">
-      <div class="uk-container uk-container-large">
-        <div>
-          <h1 class="uk-text-capitalize"><span class="text-highlight">últimos Productos</span></h1>
-          <p class="uk-text-capitalize uk-width-large@m uk-margin">Encuentra el producto a tu medida.</p>
-        </div>
+    <section class="uk-section">
+      <div class="uk-container">
+
         <div class="uk-section">
-          <div class="uk-grid uk-grid-medium uk-child-width-1-4@l uk-child-width-1-3@m uk-child-width-1-2" uk-scrollspy="cls: uk-animation-fade; target: > div > .product-container; delay: 400; repeat: true" uk-grid>
-            <div v-for="product in products" :key="product.id">
+          <div class="uk-child-width-1-2@m uk-flex uk-flex-middle" uk-grid>
+            <div>
+              <div>
+                <h1 class="uk-text-capitalize"><span class="text-highlight">últimos Productos</span></h1>
+                <p class="uk-text-capitalize uk-width-large@m uk-margin">Encuentra el producto a tu medida.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="uk-section">
+          <div class="uk-grid uk-child-width-1-4@l uk-child-width-1-3@m uk-child-width-1-2 uk-grid-match" uk-scrollspy="cls: uk-animation-slide-bottom-small; target: > div > div; delay: 200;" uk-grid>
+            <div v-for="product in randomizedProducts" :key="product.id">
               <Product :product="product"></Product>
             </div>
 
@@ -128,22 +133,31 @@
 <script>
 import axios from '~/plugins/axios'
 import Product from '~/components/Product'
-import DemoAdaptiveModal  from '~/components/ModalProduct'
+import Category from '~/components/Category'
+import DemoAdaptiveModal from '~/components/ModalProduct'
 
 export default {
   data() {
     return {
-       baseUrl: "https://say.kmeo.cl/",
+      baseUrl: "https://say.kmeo.cl/",
     }
   },
-  components:{
+  components: {
     Product,
-    DemoAdaptiveModal
+    DemoAdaptiveModal,
+    Category
   },
-  async asyncData({ params }) {
+  computed: {
+     randomizedProducts: function(){
+       return this.products.sort(function(){return 0.5 - Math.random()});
+     }
+  },
+  async asyncData({
+    params
+  }) {
     // We can use async/await ES6 feature
     const interfaces = await axios.get(
-      '/interfazs',{
+      '/interfazs', {
         params: {
           _limit: 1
         }
@@ -154,7 +168,7 @@ export default {
     );
 
     const products = await axios.get(
-      '/productos/',{
+      '/productos/', {
         params: {
           _limit: 20,
           _sort: "id:DESC"
@@ -167,7 +181,7 @@ export default {
     );
 
     const hlcategory = await axios.get(
-      '/categorias',{
+      '/categorias', {
         params: {
           nombre: "Destacados"
         }
@@ -175,13 +189,13 @@ export default {
     );
 
     return {
-       interfaces: interfaces.data[0],
-       headers: headers.data,
-       products: products.data,
-       categories: categories.data,
-       hlcategory: hlcategory.data[0],
-       hlproducts: hlcategory.data.producto
-         };
+      interfaces: interfaces.data[0],
+      headers: headers.data,
+      products: products.data,
+      categories: categories.data,
+      hlcategory: hlcategory.data[0],
+      hlproducts: hlcategory.data.producto
+    };
   },
 }
 </script>

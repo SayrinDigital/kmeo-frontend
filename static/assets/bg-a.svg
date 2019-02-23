@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1002" viewBox="0 0 1920 1002">
+  <defs>
+    <clipPath id="clip-bg-a">
+      <rect width="1920" height="1002"/>
+    </clipPath>
+  </defs>
+  <g id="bg-a" clip-path="url(#clip-bg-a)">
+    <path id="Trazado_1" data-name="Trazado 1" d="M0,14,1920-192V178L0,668Z" transform="translate(0 238)" fill="#ffdc6a"/>
+  </g>
+</svg>

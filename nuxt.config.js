@@ -34,8 +34,9 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~/plugins/uikit.js', ssr: false },{ src: '~/plugins/vue-filters.js', ssr: true }, { src: '~/plugins/vue-js-modal.js'}
-  ],
+    { src: '~/plugins/uikit.js', ssr: false },{ src: '~/plugins/vue-filters.js', ssr: true }, { src: '~/plugins/vue-js-modal.js'},
+    { src: '~/plugins/localStorage.js', ssr: false }
+    ],
 
   /*
   ** Nuxt.js modules

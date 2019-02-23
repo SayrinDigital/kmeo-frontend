@@ -1,23 +1,26 @@
 <template>
 
-  <div class="uk-position-relative product-container" v-if="product.fotos">
+  <div  @click="openModal()" class="cursor-pointer uk-position-relative product-container" v-if="product.fotos">
 
-    <div @click="openModal()">
-      <div class="uk-inline-clip uk-transition-toggle" tabindex="0" v-if="baseUrl">
-          <img class="uk-transition-scale-up uk-transition-opaque cursor-pointer" v-if="product.fotos.frontal" :src="baseUrl + product.fotos.frontal.url" uk-img alt="">
+    <div class="content uk-height-1-1">
+      <div>
+        <img v-if="product.fotos.frontal" :src="baseUrl + product.fotos.frontal.url" alt="">
       </div>
-    </div>
-    <div class="uk-position-top-left">
-      <div class="badge-container">
-        <p>{{ discountPercetange }}%</p>
+      <div class="uk-card-body">
+        <div class="brand">
+          <p v-if="product.marca.nombre" >{{ product.marca.nombre }}</p>
+          <p class="uk-visible@s" v-else>Novedades</p>
+        </div>
+        <h5>{{ product.nombre }}</h5>
+        <div class="uk-margin">
+          <p class="price uk-display-inline-block">{{ product.preciofinal | currency('$', 0)}} CLP</p>
+            <p class="price-strike uk-display-inline-block">{{ product.precioreferencial | currency('$', 0)}} CLP</p>
+        </div>
       </div>
+
     </div>
-    <div class="uk-margin-top uk-margin-bottom">
-      <h3>{{ product.nombre }}</h3>
-      <h5 v-if="product.marca">{{ product.marca.nombre }}</h5>
-      <p class="text-strike">{{ product.precioreferencial | currency('$', 0)}} CLP</p>
-      <h4>{{ product.preciofinal | currency('$', 0)}} CLP</h4>
-    </div>
+
+
   </div>
 
 </template>

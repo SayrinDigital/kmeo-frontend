@@ -45,7 +45,7 @@
             <p class="uk-text-capitalize uk-width-large@m uk-margin">Encuentra el producto a tu medida.</p>
           </div>
           <div class="uk-section">
-            <div class="uk-grid uk-grid-medium uk-child-width-1-4@l uk-child-width-1-3@m uk-child-width-1-2@s uk-child-width-1-1" uk-scrollspy="cls: uk-animation-fade; target: > div > .product-container; delay: 400; repeat: true" uk-grid>
+            <div class="uk-grid  uk-grid-match uk-child-width-1-4@l uk-child-width-1-3@m uk-child-width-1-2" uk-scrollspy="cls: uk-animation-fade; target: > div > .product-container; delay: 200;" uk-grid>
               <div v-for="product in filteredProducts" :key="category.producto.id">
                 <Product :product="product"></Product>
               </div>
@@ -97,7 +97,7 @@ export default {
        var filterBrand = this.filterbrand
 
         if(filterBrand === "Todas"){
-          return this.category.producto
+          return this.category.producto.sort(function(){return 0.5 - Math.random()});
         }else{
           return vm.category.producto.filter(function(product) {
             if(product.marca){

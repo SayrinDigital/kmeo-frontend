@@ -1,11 +1,11 @@
 <template>
-<div>
+<div  v-if="product">
 
   <no-ssr>
-    <div class="uk-position-relative product-container" v-if="product.fotos">
+    <div class="uk-position-relative product-container">
         <div class="uk-position-relative">
           <div class="uk-inline-clip uk-transition-toggle" tabindex="0" v-if="baseUrl">
-              <img class="uk-transition-scale-up uk-transition-opaque" v-if="product.fotos.frontal" :src="baseUrl + product.fotos.frontal.url" uk-img alt="">
+              <img class="uk-transition-scale-up uk-transition-opaque" width="400" height="400" v-if="product.fotos.frontal" :src="baseUrl + product.fotos.frontal.url" uk-img alt="">
           </div>
           <div class="uk-position-top-right">
             <div class="badge-container">

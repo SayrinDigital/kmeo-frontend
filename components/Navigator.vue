@@ -34,11 +34,24 @@
       </div>
 
       <div class="uk-navbar-item uk-visible@m">
-        <a class="uk-button-text">Categorías</a>
-        <div uk-dropdown>
-          <ul class="uk-nav uk-dropdown-nav">
+        <a class="uk-button-text">Categorías <span class="uk-icon uk-margin-small-left" uk-icon="icon: chevron-down"></span></a>
+        <div class="dropdown-categories uk-width-large" uk-dropdown="animation: uk-animation-slide-top-small; duration: 500">
+          <ul class="uk-nav uk-list-large uk-dropdown-nav">
             <li v-for="category in categories" :key="category.id">
-              <nuxt-link :to="{ name: 'categorias-id', params: { id: category.id }}">{{ category.nombre }}</nuxt-link>
+
+              <nuxt-link tag="a" :to="{ name: 'categorias-id', params: { id: category.id }}" >
+                <div class="category-container">
+                  <div class="image-container uk-position-center-right uk-height-1-1 uk-width-3-5 uk-background-cover " uk-img :data-src="baseUrl + category.imagen.url">
+                  </div>
+                  <div class="content nav">
+                       <div class="uk-width-2-5@l">
+                         <p>{{ category.nombre }}</p>
+                       </div>
+                  </div>
+                </div>
+              </nuxt-link>
+
+              <!--<nuxt-link :to="{ name: 'categorias-id', params: { id: category.id }}">{{ category.nombre }}</nuxt-link>-->
             </li>
           </ul>
         </div>
