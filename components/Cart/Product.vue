@@ -24,7 +24,7 @@
         <p>{{ product.preciofinal | currency('$', 0) }} CLP</p>
       </div>
       <div class="uk-margin uk-text-right">
-        <button type="button" class="uk-button action-button" @click="addToCart(product)"><span class="uk-icon" uk-icon="icon: plus"></span></button>
+        <button type="button" class="uk-button action-button addtocartbutton" @click="addToCart(product)"><span class="uk-icon" uk-icon="icon: plus"></span></button>
             <button type="button" class="uk-button danger-button" @click="removeFromCart(product)"><span class="uk-icon" uk-icon="icon: trash"></span></button>
       </div>
     </div>

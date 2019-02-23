@@ -50,19 +50,21 @@
                   </div>
                 </div>
               </nuxt-link>
-
-              <!--<nuxt-link :to="{ name: 'categorias-id', params: { id: category.id }}">{{ category.nombre }}</nuxt-link>-->
             </li>
           </ul>
         </div>
       </div>
 
-      <div class="uk-navbar-item">
+      <div class="uk-navbar-item"  z-index="99999">
         <div class="uk-position-relative">
           <nuxt-link to="/carro" uk-icon="icon: cart">
             <div class="quantity-container">
               <div class="quantity-cart uk-text-center uk-position-relative">
-                <p class="uk-position-center">{{ numberOfItems }}</p>
+                <div class="uk-position-center">
+                  <transition name="slide-fade" mode="out-in">
+                              <p :key="numberOfItems">{{ numberOfItems }}</p>
+                  </transition>
+                </div>
               </div>
             </div>
           </nuxt-link>

@@ -36,7 +36,7 @@
                      <p class="uk-margin-remove uk-display-inline-block tiny-text"><span class="old-text  text-strike"> {{ product.precioreferencial | currency('$', 0) }} CLP</span></p>
                    </div>
                    <div class="uk-margin uk-text-right">
-                     <a @click="addToCart(product)" class="uk-button">Agregar Al Carro <span class="uk-icon uk-margin-small-left" uk-icon="icon: plus;"></span></a>
+                     <a @click="addToCart(product)" class="uk-button addtocartbutton">Agregar Al Carro <span class="uk-icon uk-margin-small-left" uk-icon="icon: plus;"></span></a>
                    </div>
                  </div>
             </div>

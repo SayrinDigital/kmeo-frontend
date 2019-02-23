@@ -164,17 +164,6 @@ img[data-src][src*='data:image'] {
   }
 }
 
-@keyframes addToCartAnimation{
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(2);
-  }
-  100%{
-    transform: scale(1)
-  }
-}
 
 
 .quantity-container{
@@ -314,6 +303,22 @@ button.uk-button{
      top: 200px;
    }
 
+}
+
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active for <2.1.8 */ {
+  transform: scale(2);
+  opacity: 0;
+}
+
+.addtocartbutton{
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0)!important;
 }
 
 .category-container{
