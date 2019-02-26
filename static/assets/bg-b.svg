@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="779" viewBox="0 0 1920 779">
+  <defs>
+    <clipPath id="clip-bg-b">
+      <rect width="1920" height="779"/>
+    </clipPath>
+  </defs>
+  <g id="bg-b" clip-path="url(#clip-bg-b)">
+    <path id="Path_1" data-name="Path 1" d="M0,118.308,1920,457.719V735.57L0,542.572Z" transform="translate(1920 872) rotate(180)" fill="#61cff8"/>
+  </g>
+</svg>

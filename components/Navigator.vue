@@ -1,6 +1,6 @@
 <template>
 <div uk-sticky="animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: active-sticky; cls-inactive: uk-navbar-transparent; top: 200">
-  <nav class="uk-navbar-container uk-position-relative uk-navbar-transparent" id="mainnav" uk-navbar="mode: click">
+  <nav  class="uk-position-relative uk-navbar-container  uk-navbar-transparent" id="mainnav" uk-navbar="mode: click">
 
     <div class="uk-navbar-left">
       <div class="uk-navbar-item">

@@ -1,19 +1,18 @@
 <template>
 <div>
 
-  <section class="uk-section header-container  uk-width-4-5@m background-soft" >
-    <div class="uk-section uk-section-large">
-      <div class="say-padding-left-container">
-        <div class="uk-container uk-container-large">
-          <p class="uk-width-2-5@m">Búsqueda</p>
-          <h1 class="text-responsive">Resultados</h1>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div  z-index="0" class="uk-position-relative uk-section uk-section-large category-header uk-background-cover" uk-img data-src="https://images.unsplash.com/photo-1484920274317-87885fcbc504?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80">
+   <div class="overlay uk-position-cover"></div>
+   <div class="uk-section uk-section-small uk-position-relative">
+     <div class="uk-container">
+       <p>Búsqueda</p>
+       <h1 class="text-responsive">Resultados</h1>
+     </div>
+   </div>
+  </div>
 
-  <section class="uk-section uk-section-large" v-if="products">
-    <div class="uk-container uk-container-large">
+  <section class="uk-section" v-if="products">
+    <div class="uk-container">
 
         <div>
           <div>
@@ -21,7 +20,7 @@
             <p class="uk-text-capitalize uk-width-large@m uk-margin">Encuentra el producto a tu medida.</p>
           </div>
           <div class="uk-section">
-            <div class="uk-grid-medium uk-child-width-1-4@l uk-child-width-1-3@m uk-child-width-1-2@s uk-child-width-1-1" uk-scrollspy="cls: uk-animation-fade; target: > div > .product-container; delay: 400; repeat: true" uk-grid>
+            <div class="uk-grid-medium uk-child-width-1-4@l uk-child-width-1-3@m uk-child-width-1-2@s uk-child-width-1-2 uk-grid" uk-scrollspy="cls: uk-animation-fade; target: > div > .product-container; delay: 400; repeat: true" uk-grid>
               <div v-for="product in products" :key="product.id">
                 <Product :product="product"></Product>
               </div>

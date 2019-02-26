@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="uk-margin">
-                  <div class="uk-form-controls">
+                  <div>
                      <h4><input class="uk-checkbox" type="checkbox" v-model="fastsent" checked> Despacho rápido</h4>
                      <div uk-dropdown>
                        <div><p v-if="despacho">{{ despacho.detalles }}</p></div>

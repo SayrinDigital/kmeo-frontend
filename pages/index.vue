@@ -2,15 +2,35 @@
 <div>
 
   <demo-adaptive-modal />
-  <section class="uk-section">
+  <!--<section class="uk-section">
     <div class="uk-section uk-section-large header-container">
       <div class="uk-container uk-container-large">
         <div>
           <h1 class="text-responsive">{{ interfaces.tituloencabezado }}</h1>
           <p class="uk-width-2-5@m uk-margin">{{ interfaces.descripcion }}</p>
+
+
         </div>
       </div>
+    </div>-->
+
+  <div class="uk-section">
+    <div class="uk-container">
+      <div class="uk-child-width-1-2@s uk-flex uk-flex-middle" uk-grid>
+         <div>
+           <div>
+             <h1 class="text-responsive">{{ interfaces.tituloencabezado }}</h1>
+             <p class="uk-width-4-5@m uk-margin">{{ interfaces.descripcion }}</p>
+           </div>
+         </div>
+         <div>
+           <div>
+             <img uk-img src="/assets/header.png" alt="">
+           </div>
+         </div>
+      </div>
     </div>
+  </div>
 
     <section class="uk-section uk-section-small">
       <div uk-grid>
@@ -32,9 +52,9 @@
               </div>
 
             </div>
-            <div class="uk-position-top-left link-container uk-width-4-5@m uk-text-right@m uk-text-left">
+            <!--<div class="uk-position-top-left link-container uk-width-4-5@m uk-text-right@m uk-text-left">
               <nuxt-link class="uk-button-text" to="/faq">Visíta nuestra seccion de preguntas y respuestas. <span class="uk-icon uk-margin-small-left" uk-icon="icon: arrow-right;"></span> </nuxt-link>
-            </div>
+            </div>-->
           </div>
         </div>
         <div class="uk-width-1-5@m">
@@ -45,28 +65,21 @@
       </div>
     </section>
 
-    <section class="uk-section uk-section-large" v-if="hlcategory">
-      <div class="">
-        <div uk-grid class="uk-flex uk-grid-large uk-flex-middle">
-          <div class="uk-width-2-5@m">
-            <div class=" say-padding-left-container">
-              <div class="uk-container">
-                <h1><span class="text-highlight">Destacados</span></h1>
-                <p class="uk-margin">{{ hlcategory.descripcion }}</p>
-              </div>
-            </div>
-          </div>
-          <div class="uk-width-3-5@m">
-            <div class="uk-container">
-              <div class="uk-position-relative uk-visible-toggle" tabindex="-1" uk-slider>
-
-                <ul class="uk-slider-items uk-grid" v-if="hlcategory.producto">
-                  <li v-for="product in hlcategory.producto" :key="hlcategory.producto.id" class="uk-width-4-5">
-                    <Product :product="product"></Product>
-                  </li>
-                </ul>
-              </div>
-            </div>
+    <section class="uk-section uk-section-large uk-background-cover"  uk-img data-src="/assets/bg-b.svg" v-if="hlcategory">
+      <div class="uk-container">
+        <div class="uk-margin">
+          <h1><span class="text-highlight">Destacados</span></h1>
+          <p class="uk-margin uk-width-large@m">Productos más destacados por su oferta y basado en la búsqueda de nuestros clientes.</p>
+        </div>
+      </div>
+      <div class="uk-section padding-slider">
+        <div v-if="hlcategory.producto" uk-slider="center: true; autoplay: true; autoplay-interval: 1500; pause-on-hover: false">
+          <div class="uk-slider-container">
+            <ul class="uk-slider-items uk-child-width-1-6@l uk-child-width-1-4@m uk-child-width-1-2 uk-grid uk-grid-medium">
+              <li v-for="product in hlcategory.producto" :key="hlcategory.producto.id">
+                  <Product :product="product"></Product>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -100,7 +113,7 @@
 
     </section>
 
-    <section class="uk-section">
+    <section class="uk-section" >
       <div class="uk-container">
 
         <div class="uk-section">

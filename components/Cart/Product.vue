@@ -1,7 +1,54 @@
 <template>
 <div  v-if="product">
 
-  <no-ssr>
+  <div  class="cursor-pointer uk-position-relative product-container" v-if="product.fotos">
+
+    <div class="content uk-height-1-1">
+      <div>
+        <img v-if="product.fotos.frontal" :src="baseUrl + product.fotos.frontal.url" alt="">
+      </div>
+      <div class="uk-card-body">
+        <div class="brand">
+          <p v-if="product.marca.nombre" >{{ product.marca.nombre }}</p>
+          <p class="uk-visible@s" v-else>Novedades</p>
+        </div>
+        <h5>{{ product.nombre }}</h5>
+        <div class="uk-margin">
+          <p class="price-strike">{{ product.precioreferencial | currency('$', 0)}} CLP</p>
+          <p class="price">{{ product.preciofinal | currency('$', 0)}} CLP</p>
+        </div>
+        <div class="uk-margin uk-text-right">
+          <button type="button" class="uk-button action-button addtocartbutton" @click="addToCart(product)"><span class="uk-icon" uk-icon="icon: plus"></span></button>
+              <button type="button" class="uk-button danger-button" @click="removeFromCart(product)"><span class="uk-icon" uk-icon="icon: minus"></span></button>
+        </div>
+      </div>
+
+      <div class="uk-position-top-right">
+        <div class="uk-overlay">
+          <div class="percentage-container">
+            <p>{{ discountPercetange }} %</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="uk-position-top-left">
+        <div class="uk-overlay">
+          <div class="percentage-container">
+            <p>{{ product.quantity }} u.</p>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+
+
+
+  </div>
+
+  <!--<no-ssr>
     <div class="uk-position-relative product-container">
         <div class="uk-position-relative">
           <div class="uk-inline-clip uk-transition-toggle" tabindex="0" v-if="baseUrl">
@@ -28,7 +75,7 @@
             <button type="button" class="uk-button danger-button" @click="removeFromCart(product)"><span class="uk-icon" uk-icon="icon: trash"></span></button>
       </div>
     </div>
-  </no-ssr>
+  </no-ssr>-->
 </div>
 </template>
 
@@ -37,11 +84,8 @@ import { mapMutations } from 'vuex'
 export default {
   data(){
     return{
-      baseUrl: ""
+      baseUrl: "https://say.kmeo.cl"
     }
-  },
-  beforeMount(){
-      this.baseUrl = this.$axios.defaults.baseURL
   },
   props: ['product'],
   computed:{

@@ -13,12 +13,22 @@
         </div>
         <h5>{{ product.nombre }}</h5>
         <div class="uk-margin">
-          <p class="price uk-display-inline-block">{{ product.preciofinal | currency('$', 0)}} CLP</p>
-            <p class="price-strike uk-display-inline-block">{{ product.precioreferencial | currency('$', 0)}} CLP</p>
+          <p class="price-strike">{{ product.precioreferencial | currency('$', 0)}} CLP</p>
+          <p class="price">{{ product.preciofinal | currency('$', 0)}} CLP</p>
         </div>
       </div>
 
+      <div class="uk-position-top-right">
+        <div class="uk-overlay">
+          <div class="percentage-container">
+            <p>{{ discountPercetange }} %</p>
+          </div>
+        </div>
+      </div>
+
+
     </div>
+
 
 
   </div>

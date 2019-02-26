@@ -2,68 +2,45 @@
 <div v-if="category">
 
 <demo-adaptive-modal/>
-  <section class="uk-section header-container  uk-width-4-5@m background-soft" :Style=" 'background-color: ' +category.color+ ';' ">
-    <div class="uk-section uk-section-large">
-      <div class="say-padding-left-container">
-        <div class="uk-container uk-container-large">
-          <p class="uk-width-2-5@m">Categorías</p>
-          <h1 v-if="category" class="text-responsive">{{ category.nombre }}</h1>
-          <p v-if="category" class="uk-margin-top uk-width-2-5@m">{{ category.descripcion }}</p>
+
+  <Header :category="category"></Header>
+
+
+  <div class="uk-container category-product-container">
+    <div class="uk-section uk-section-small">
+      <h3>Filtrar</h3>
+      <p>Por las marcas más reconocidas</p>
+      <div class="uk-margin">
+
+        <div class="brands uk-text-left@m uk-text-center" v-if="brands">
+       <label class="filter-button"><input class="uk-radio"  v-model="filterbrand" type="radio" value="Todas"> Todas</label>
+       <label class="filter-button" v-for="brand in brands"><input class="uk-radio"  v-model="filterbrand" type="radio" :value="brand.nombre"> {{ brand.nombre }}</label>
+
+     </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div class="uk-container">
+    <div class="uk-section">
+      <div class="uk-grid  uk-grid-match uk-child-width-1-4@l uk-child-width-1-3@m uk-child-width-1-2" uk-scrollspy="cls: uk-animation-fade; target: > div > .product-container; delay: 200;" uk-grid>
+        <div v-for="product in filteredProducts" :key="category.producto.id">
+          <Product :product="product"></Product>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section class="uk-section uk-section-large" v-if="category.producto">
-    <div class="uk-container uk-container-large">
 
-      <div uk-grid>
-        <div class="uk-width-1-5@m">
-          <div>
-            <h1 class="uk-text-capitalize"><span class="text-highlight">Filtrar</span></h1>
-            <p class="uk-text-capitalize uk-width-large@m uk-margin">Ajusta el buscador en base a tus necesidades.</p>
-
-                          <hr class="uk-hr">
-            <div class="uk-section uk-section-small">
-              <div>
-                <h4>Marcas</h4>
-                <div class="uk-margin-small">
-                  <p><input class="uk-radio" v-model="filterbrand" type="radio" checked value="Todas" name="radio1"> Todas</p>
-                </div>
-                <div class="uk-margin-small" v-for="brand in brands">
-                  <p><input class="uk-radio"  v-model="filterbrand" type="radio" :value="brand.nombre" name="radio1"> {{ brand.nombre }}</p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-        <div class="uk-width-4-5@m">
-          <div>
-            <h1 class="uk-text-capitalize"><span class="text-highlight">últimos Productos</span></h1>
-            <p class="uk-text-capitalize uk-width-large@m uk-margin">Encuentra el producto a tu medida.</p>
-          </div>
-          <div class="uk-section">
-            <div class="uk-grid  uk-grid-match uk-child-width-1-4@l uk-child-width-1-3@m uk-child-width-1-2" uk-scrollspy="cls: uk-animation-fade; target: > div > .product-container; delay: 200;" uk-grid>
-              <div v-for="product in filteredProducts" :key="category.producto.id">
-                <Product :product="product"></Product>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-  </section>
 </div>
 </template>
 
 <script>
 import axios from '~/plugins/axios'
 import Product from '~/components/Product'
+import Header from '~/components/Category/Header'
 import DemoAdaptiveModal  from '~/components/ModalProduct'
 
 export default {
@@ -88,7 +65,8 @@ export default {
 },
   components: {
     Product,
-    DemoAdaptiveModal
+    DemoAdaptiveModal,
+    Header
   },
   computed: {
      filteredProducts: function(){
