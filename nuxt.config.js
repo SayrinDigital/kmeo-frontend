@@ -71,6 +71,8 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
+    vendor: [
+     'gsap'],
     extend(config, ctx) {
 
     }

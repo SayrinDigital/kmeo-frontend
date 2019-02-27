@@ -15,7 +15,7 @@
     "cookieparser": "^0.1.0",
     "cross-env": "^5.2.0",
     "crypto-js": "^3.1.9-1",
-    "gsap": "^2.1.0",
+    "gsap": "^2.1.1",
     "install": "^0.12.2",
     "nuxt": "^2.4.0",
     "strapi-sdk-javascript": "^0.3.1",

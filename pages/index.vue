@@ -127,8 +127,8 @@
           </div>
         </div>
 
-        <div class="uk-section">
-          <div class="uk-grid uk-child-width-1-4@l uk-child-width-1-3@m uk-child-width-1-2 uk-grid-match" uk-scrollspy="cls: uk-animation-slide-bottom-small; target: > div > div; delay: 200;" uk-grid>
+        <div class="uk-section product-section">
+          <div class="uk-grid uk-child-width-1-4@l uk-child-width-1-3@m uk-child-width-1-2 uk-grid-match" uk-grid>
             <div v-for="product in randomizedProducts" :key="product.id">
               <Product :product="product"></Product>
             </div>
