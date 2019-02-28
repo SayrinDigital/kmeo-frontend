@@ -1,7 +1,7 @@
 <template>
-<div  v-if="product">
+<div class="uk-height-1-1"  v-if="product">
 
-  <div  class="cursor-pointer uk-position-relative product-container" v-if="product.fotos">
+  <div  class="cursor-pointer uk-position-relative product-container uk-height-1-1" v-if="product.fotos">
 
     <div class="content uk-height-1-1">
       <div>
@@ -9,17 +9,18 @@
       </div>
       <div class="uk-card-body">
         <div class="brand">
-          <p v-if="product.marca.nombre" >{{ product.marca.nombre }}</p>
-          <p class="uk-visible@s" v-else>Novedades</p>
+          <!--<p v-if="product.marca.nombre" >{{ product.marca.nombre }}</p>-->
+          <!--<p class="uk-visible@s" v-else>Novedades</p>-->
         </div>
         <h5>{{ product.nombre }}</h5>
-        <div class="uk-margin">
-          <p class="price-strike">{{ product.precioreferencial | currency('$', 0)}} CLP</p>
+        <div>
+          <!--<p class="price-strike">{{ product.precioreferencial | currency('$', 0)}} CLP</p>-->
           <p class="price">{{ product.preciofinal | currency('$', 0)}} CLP</p>
+          <p><span class="uk-icon uk-margin-small-right" uk-icon="icon: grid;"></span>{{ product.quantity }} u.</p>
         </div>
         <div class="uk-margin uk-text-right">
-          <button type="button" class="uk-button action-button addtocartbutton" @click="addToCart(product)"><span class="uk-icon" uk-icon="icon: plus"></span></button>
-              <button type="button" class="uk-button danger-button" @click="removeFromCart(product)"><span class="uk-icon" uk-icon="icon: minus"></span></button>
+          <button type="button" uk-tooltip="Agregar unidad" class="uk-button cart-add-button" @click="addToCart(product)"><span class="uk-icon" uk-icon="icon: plus"></span></button>
+          <button type="button" uk-tooltip="Quitar unidad"class="uk-button cart-remove-button" @click="removeFromCart(product)"><span class="uk-icon" uk-icon="icon: trash"></span></button>
         </div>
       </div>
 
@@ -31,13 +32,13 @@
         </div>
       </div>
 
-      <div class="uk-position-top-left">
+      <!--<div class="uk-position-top-left">
         <div class="uk-overlay">
           <div class="percentage-container">
             <p>{{ product.quantity }} u.</p>
           </div>
         </div>
-      </div>
+      </div>-->
 
 
 

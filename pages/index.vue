@@ -52,6 +52,7 @@
           </div>
         </div>
       </section>
+
       <section class="uk-section uk-section-large uk-background-cover"  uk-img data-src="/assets/bg-b.svg" v-if="hlcategory">
         <div class="uk-container">
           <div class="uk-margin">
@@ -60,7 +61,7 @@
           </div>
         </div>
         <div class="uk-section padding-slider">
-          <div v-if="hlcategory.producto" uk-slider="center: true; autoplay: true; autoplay-interval: 1500;">
+          <div v-if="hlcategory.producto" uk-slider="autoplay: true; autoplay-interval: 1500;">
             <div class="uk-slider-container">
               <ul class="uk-slider-items uk-child-width-1-6@l uk-child-width-1-4@m uk-child-width-1-2 uk-grid uk-grid-medium">
                 <li v-for="product in hlcategory.producto" :key="hlcategory.producto.id">
@@ -71,6 +72,7 @@
           </div>
         </div>
       </section>
+
       <section class="uk-section uk-background-cover"  id="categories-section" uk-img data-src="/assets/bg-a.svg">
 
         <div class="uk-container uk-container-large">
@@ -111,7 +113,7 @@
           </div>
 
           <div class="uk-section product-section">
-            <div class="uk-grid uk-child-width-1-4@l uk-child-width-1-3@m uk-child-width-1-2 uk-grid-match" uk-grid>
+            <div class="uk-grid uk-child-width-1-4@l uk-child-width-1-3@m uk-child-width-1-2 uk-grid-match uk-grid-medium" uk-grid>
               <div v-for="product in randomizedProducts" :key="product.id">
                 <Product :product="product"></Product>
               </div>

@@ -180,25 +180,49 @@ img[data-src][src*='data:image'] {
   }
 }
 
+hr.uk-hr{
+  border-top: 1px solid #fff;
+}
+
+.uk-radio:checked, .uk-checkbox:checked, .uk-checkbox:indeterminate{
+  background-color: $hl-color;
+}
+
+.uk-radio:checked:focus, .uk-checkbox:checked:focus, .uk-checkbox:indeterminate:focus{
+  background-color: $hl-color;
+}
+
+.uk-radio:focus, .uk-checkbox:focus{
+  border-color: $hl-color;
+}
+
 .payment-gate{
   li{
     margin: 10px 20px;
     &.uk-active{
       a{
-          border-color: $accent-color;
-          color: $accent-color;
+        background-color: $hl-color;
+        color: #fff;
+        box-shadow: 0px 10px 18px -8px rgba(0, 0, 0,0.1);
       }
     }
     a{
-      border: 1px solid $t-color;
+      display: block;
+      background: #fff;
+      border-radius: 10px;
       padding: 40px 20px;
       text-align: center;
       color: $t-color;
       font-family: $h-font;
       text-transform: capitalize;
-      &:focus{
-        border-color: $accent-color;
-        color: $accent-color;
+      transition: all .3s ease-in-out;
+      &:hover{
+        background-color: $hl-color;
+        color: #fff;
+        box-shadow: 0px 10px 18px -8px rgba(0, 0, 0,0.1);
+      }
+      &:active{
+        transform: translateY(-10px);
       }
     }
   }
@@ -307,23 +331,66 @@ input.uk-input{
 }
 
 button.uk-button{
+  transition: all 200ms ease-in-out;
   &.style-a{
-    background-color: #f6d04b;
+    background-color: $hl-color;
     font-family: $t-font;
     color: #fff;
     text-transform: capitalize;
     font-size: $t-size;
     border-radius: 180px;
+    &:active{
+      transform: scale(1.1) translateY(-10px);
+    }
   }
   &.action-button{
     border-radius: 180px;
-    background: #4891dd;
+    background: $hl-color;
     color: #fff;
+    &:active{
+      transform: scale(1.1) translateY(-10px);
+    }
   }
   &.danger-button{
     border-radius: 180px;
     background: #f64949;
     color: #fff;
+    &:active{
+      transform: scale(1.1) translateY(-10px);
+    }
+  }
+  &.cart-add-button{
+    padding: 0;
+    color: #cdcdcd;
+    background: #f1f1f1;
+    border-radius: 10px;
+    line-height: inherit;
+    padding: 10px;
+    transition: all 200ms ease-in-out;
+    &:hover{
+      color: #fff;
+      background: $hl-color;
+      box-shadow: 0px 10px 18px -8px rgba(0, 0, 0,0.1);
+    }
+    &:active{
+      transform: scale(1.1) translateY(-10px);
+    }
+  }
+  &.cart-remove-button{
+    line-height: inherit;
+    padding: 10px;
+    color: #cdcdcd;
+    background: #f1f1f1;
+    border-radius: 10px;
+    transition: all 200ms ease-in-out;
+    &:hover{
+      color: #fff;
+      background: #f64949;
+      box-shadow: 0px 10px 18px -8px rgba(0, 0, 0,0.1);
+    }
+    &:active{
+      transform: scale(1.1) translateY(-10px);
+    }
   }
 }
 
@@ -381,10 +448,6 @@ button.uk-button{
 /* .slide-fade-leave-active for <2.1.8 */ {
   transform: scale(2);
   opacity: 0;
-}
-
-.addtocartbutton{
-  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0)!important;
 }
 
 .category-container{
@@ -478,7 +541,7 @@ img{
   .content{
     background: #fff;
     border-radius: 10px;
-
+    overflow: hidden;
     /*box-shadow: 0px 13px 10px -7px rgba(0, 0, 0,0.1);*/
     transition: all .6s cubic-bezier(0.175, 0.885, 0, 1);
     .price{
@@ -578,6 +641,26 @@ footer{
   .responsive-heightport{
     height: 300px;
     min-height: 300px;
+  }
+
+  .product-container{
+    .content{
+      .product-title{
+        font-size: 13px;
+      }
+      .uk-card-body{
+        padding: 15px;
+      }
+      .price{
+        font-size: 13px;
+      }
+      .percentage-container{
+        padding: 5px 15px;
+        p{
+          font-size: 12px;
+        }
+      }
+    }
   }
 
   .category-container{

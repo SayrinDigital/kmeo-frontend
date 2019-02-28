@@ -1,8 +1,8 @@
 <template>
-<div class="uk-background-default">
-  <section class="header-container">
+<div>
+  <section class="header-container uk-background-cover"  uk-img data-src="/assets/bg-a.svg">
     <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
-      <div class="background-blue" uk-height-viewport>
+      <div uk-height-viewport>
 
         <div class="uk-padding-large uk-width-4-5 uk-margin-auto">
           <div class="uk-section uk-section-large">
@@ -70,38 +70,40 @@
 
       </div>
       <div class="uk-flex-first">
-        <div class="uk-padding-small">
-          <div class="uk-width-4-5@m uk-margin-auto">
-            <h1>Medios de Pago</h1>
-            <p class="uk-margin">Seleccione el medio de pago que más le acomode.</p>
-            <hr class="uk-hr">
+        <div class="uk-section uk-section-large">
+          <div class="uk-container">
+            <div class="uk-width-4-5@m uk-margin-auto uk-text-center uk-text-left@s">
+              <h1 class="uk-margin-top">Medios de Pago</h1>
+              <p class="uk-margin">Seleccione el medio de pago que más le acomode.</p>
+              <hr class="uk-hr">
 
-            <div>
-              <div class="" uk-grid>
-                <div class="uk-width-auto@m">
-                  <ul class="uk-tab-left payment-gate" uk-tab="connect: #component-tab-left; animation: uk-animation-fade">
-                    <li v-for="pay in paymentmethods">
-                      <a href="#">
-<span v-if="pay.nombre == 'Webpay'" class="uk-icon uk-margin-small-right" uk-icon="icon: credit-card"></span>
-<span v-if="pay.nombre == 'Caja Vecina'" class="uk-icon uk-margin-small-right" uk-icon="icon: home"></span>
-<span v-if="pay.nombre == 'Transferencia'" class="uk-icon uk-margin-small-right" uk-icon="icon: laptop"></span>
-                        {{ pay.nombre }}</a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="uk-width-expand@m">
-                  <ul id="component-tab-left" class="uk-switcher">
-                    <li  v-for="pay in paymentmethods">
-                      <div>
-                        <h2>{{ pay.nombre }}</h2>
-                        <p class="uk-margin">{{ pay.descripcion }}</p>
-                      </div>
-                    </li>
-                  </ul>
+              <div>
+                <div class="" uk-grid>
+                  <div class="uk-width-auto@m">
+                    <ul class="payment-gate uk-list"  uk-switcher="animation: uk-animation-fade; toggle: > *; connect: #component-tab-left">
+                      <li v-for="pay in paymentmethods">
+                        <a href="#">
+                              <span v-if="pay.nombre == 'Webpay'" class="uk-icon uk-margin-small-right" uk-icon="icon: credit-card"></span>
+                              <span v-if="pay.nombre == 'Caja Vecina'" class="uk-icon uk-margin-small-right" uk-icon="icon: home"></span>
+                              <span v-if="pay.nombre == 'Transferencia'" class="uk-icon uk-margin-small-right" uk-icon="icon: laptop"></span>
+                          {{ pay.nombre }}</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="uk-width-expand@m">
+                    <ul id="component-tab-left" class="uk-switcher">
+                      <li  v-for="pay in paymentmethods">
+                        <div>
+                          <h2>{{ pay.nombre }}</h2>
+                          <p class="uk-margin">{{ pay.descripcion }}</p>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
-            </div>
 
+            </div>
           </div>
         </div>
       </div>

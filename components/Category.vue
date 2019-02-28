@@ -3,7 +3,7 @@
   <div v-if="category">
       <div>
         <div class="category-container">
-          <div class="image-container uk-position-center-right uk-height-1-1 uk-width-3-5 uk-background-cover " uk-img :data-src="baseUrl + category.imagen.url">
+          <div class="image-container uk-position-center-right uk-height-1-1 uk-width-3-5 uk-background-cover " :style="'background-image: url('+baseUrl + category.imagen.url+');'">
           </div>
           <div class="content">
                <div class="uk-width-2-5@l">

@@ -1,8 +1,8 @@
 <template>
 
-<div>
-  <div>
-    <div :uk-tooltip="product.descripcion" class="cursor-pointer product-container   uk-transition-toggle uk-position-relative" v-if="product.fotos">
+<div class="uk-height-1-1" >
+  <div class="uk-height-1-1" >
+    <div :uk-tooltip="product.descripcion" class="cursor-pointer product-container uk-height-1-1  uk-transition-toggle uk-position-relative" v-if="product.fotos">
       <div class="content uk-height-1-1">
         <div class="uk-inline-clip">
           <img v-if="product.fotos.frontal" :src="baseUrl + product.fotos.frontal.url" alt="">
@@ -13,17 +13,17 @@
             <p v-if="product.marca.nombre" >{{ product.marca.nombre }}</p>
             <p class="uk-visible@s" v-else>Novedades</p>
           </div>
-          <h5>{{ product.nombre }}</h5>
+          <h5 class="product-title">{{ product.nombre }}</h5>
           <div class="uk-margin-small">
-            <div uk-grid>
-              <div class="uk-width-expand">
+            <div class="uk-grid-small" uk-grid>
+              <div class="uk-width-expand@s">
                 <div>
                   <p class="price-strike">{{ product.precioreferencial | currency('$', 0)}} CLP</p>
                   <p class="price">{{ product.preciofinal | currency('$', 0)}} CLP</p>
                 </div>
               </div>
-              <div class="uk-width-auto">
-                <div>
+              <div class="uk-width-auto@s">
+                <div class=" uk-text-right">
                   <a @click="addProduct(product)" uk-tooltip="Agregar Al Carro" class="addtocartbutton uk-icon-button" uk-icon="cart"></a>
                 </div>
               </div>
