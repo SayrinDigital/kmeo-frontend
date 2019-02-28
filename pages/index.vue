@@ -174,8 +174,10 @@ export default {
      vm.startAnimation()
    })
 
+   this.disolveLoader()
+
    if (process.browser) {
-  window.onNuxtReady((app) => {
+     window.onNuxtReady((app) => {
     this.disolveLoader()
   })
 }
