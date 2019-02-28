@@ -24,7 +24,7 @@
               </div>
               <div class="uk-width-auto">
                 <div>
-                  <a @click="startAnimation" uk-tooltip="Agregar Al Carro" class="addtocartbutton uk-icon-button" uk-icon="cart"></a>
+                  <a @click="addProduct(product)" uk-tooltip="Agregar Al Carro" class="addtocartbutton uk-icon-button" uk-icon="cart"></a>
                 </div>
               </div>
             </div>
@@ -134,6 +134,10 @@ export default {
        this.timeline.restart()
        this.$nuxt.$emit('START_ANIMATION');
     },
+    addProduct: function(product){
+      this.startAnimation()
+      this.$store.commit('cart/add', product)
+    }
   }
 }
 </script>

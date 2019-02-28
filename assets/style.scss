@@ -31,6 +31,18 @@ html, body{
   z-index: 999;
 }
 
+.fixed-loader{
+  background: $hl-color;
+  top: 0;
+    left: 0;
+    z-index: 999;
+    opacity: 1;
+}
+
+.loader-logo{
+  z-index: 9999;
+}
+
 .v--modal{
   background: $main-background;
   border-radius: 10px;
@@ -500,7 +512,7 @@ img{
 
 footer{
   .left-container{
-    background-color: $accent-color;
+    background-color: $hl-color;
     h1,p{
       color: #fff;
     }
