@@ -1,8 +1,6 @@
 <template>
 <div v-if="category">
 
-<demo-adaptive-modal/>
-
   <Header :category="category"></Header>
 
 
@@ -14,7 +12,7 @@
 
         <div class="brands uk-text-left@m uk-text-center" v-if="brands">
        <label class="filter-button"><input class="uk-radio"  v-model="filterbrand" type="radio" value="Todas"> Todas</label>
-       <label class="filter-button" v-for="brand in brands"><input class="uk-radio"  v-model="filterbrand" type="radio" :value="brand.nombre"> {{ brand.nombre }}</label>
+       <label class="filter-button" v-for="brand in brandys"><input class="uk-radio"  v-model="filterbrand" type="radio" :value="brand"> {{ brand }}</label>
 
      </div>
 
@@ -33,6 +31,15 @@
     </div>
   </div>
 
+  <div class="uk-position-fixed uk-position-bottom-center">
+   <div class="uk-position-relative">
+     <div ref="cart"  id="cart-icon">
+       <span class="uk-icon" uk-icon="icon: cart; ratio: 3;"></span>
+     </div>
+      <div ref="bubblePulse" class="bubble-pulse"></div>
+   </div>
+</div>
+
 
 </div>
 </template>
@@ -41,7 +48,6 @@
 import axios from '~/plugins/axios'
 import Product from '~/components/Product'
 import Header from '~/components/Category/Header'
-import DemoAdaptiveModal  from '~/components/ModalProduct'
 
 export default {
   data() {
@@ -65,7 +71,6 @@ export default {
 },
   components: {
     Product,
-    DemoAdaptiveModal,
     Header
   },
   computed: {
@@ -83,11 +88,26 @@ export default {
             }
           })
         }
+     },
+     brandys: function(){
+          var brands =  this.category.producto.map(a => a.marca.nombre)
+          return [...new Set(brands)];
      }
   },
   beforeMount() {
     this.id = this.$route.params.id
     this.loadBrands()
+  },
+  mounted(){
+    var vm = this
+
+    if (process.browser) {
+    this.timeline = new TimelineLite({ paused: true })
+    this.cartAnimation()
+   }
+   this.$nuxt.$on('START_ANIMATION',function(){
+     vm.startAnimation()
+   })
   },
   asyncData ({ params }) {
   return axios.get('/categorias/' + params.id)
@@ -96,6 +116,65 @@ export default {
   })
 },
   methods: {
+
+    cartAnimation: function(){
+
+       const { cart } = this.$refs
+       const { bubblePulse } = this.$refs
+
+       this.timeline.to(cart, .5, {
+        scale: 1,
+        opacity: 1,
+        x:0,
+        y:-80,
+       ease: Power4.easeInOut
+      })
+
+      this.timeline.to(
+            bubblePulse,
+            0.5,
+            {
+              scale: 0.9,
+              opacity: 1,
+              y: -80
+            },
+           '-=0.5'
+          )
+
+      this.timeline.to(cart, .2, {
+        scale: 1.01,
+        y: -91,
+       ease: Power4.easeInOut
+      })
+      this.timeline.to(cart, .2, {
+        scale: 1,
+       ease: Power4.easeInOut
+      })
+      this.timeline.to(cart, .5, {
+        opacity: 0,
+        scale: 1,
+         x:0,
+         y:80,
+       ease: Power4.easeInOut,
+        display: 'none'
+      })
+
+      this.timeline.to(
+       bubblePulse,
+       1.1,
+       {
+         scale: 3,
+         opacity: 0,
+         ease: Expo.easeOut,
+         display: 'none'
+       },
+       '-=1.2'
+     )
+
+    },
+    startAnimation: function(){
+       this.timeline.restart()
+    },
 
     loadBrands: function(){
       axios

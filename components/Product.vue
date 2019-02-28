@@ -3,7 +3,6 @@
 <div>
   <div>
     <div :uk-tooltip="product.descripcion" class="cursor-pointer product-container   uk-transition-toggle uk-position-relative" v-if="product.fotos">
-
       <div class="content uk-height-1-1">
         <div class="uk-inline-clip">
           <img v-if="product.fotos.frontal" :src="baseUrl + product.fotos.frontal.url" alt="">
@@ -15,7 +14,7 @@
             <p class="uk-visible@s" v-else>Novedades</p>
           </div>
           <h5>{{ product.nombre }}</h5>
-          <div class="uk-margin">
+          <div class="uk-margin-small">
             <div uk-grid>
               <div class="uk-width-expand">
                 <div>
@@ -41,9 +40,13 @@
         </div>
 
 
-      </div>
+             <div class="box-hover-product" ref="box">
+               <img class="uk-border-rounded" v-if="product.fotos.frontal" :src="baseUrl + product.fotos.frontal.url" alt="">
+             </div>
 
+      </div>
     </div>
+
         <div class="drop-upper uk-visible@s" uk-drop=" offset: 30; pos: right-center; delay-hide: 0; animation: uk-animation-slide-top-small; duration: 300">
             <div class="dropdown">
               <div>
@@ -59,19 +62,32 @@
 
 <script>
 
-let TweenLite;
-if (process.browser) {
-  TweenLite = require("gsap/TweenLite");
-}
+import { TimelineLite } from 'gsap'
 
 export default {
   data(){
     return{
       baseUrl: "https://say.kmeo.cl",
-      timeline: null
+      timeline: null,
+      windowHeight: null
     }
   },
   components: {
+
+  },
+  mounted(){
+
+
+
+    if (process.browser) {
+    this.timeline = new TimelineLite({ paused: true })
+   }
+
+
+   this.$nextTick(function () {
+       this.getWindowHeight()
+     })
+     window.addEventListener('resize', this.getWindowHeight)
 
   },
   props: ['product'],
@@ -82,12 +98,42 @@ export default {
      }
   },
   methods: {
-    openModal: function(){
-       this.$modal.show('modal-product-card', { product: this.product })
-    },
+    getWindowHeight (event) {
+     this.windowHeight = document.documentElement.clientHeight
+   },
     cartAnimation: function(){
 
-    }
+       const { box } = this.$refs
+       var rect = box.getBoundingClientRect()
+       var height = box.clientHeight
+       var width = box.clientWidth
+       var centeredBottom = (document.documentElement.clientWidth/2) - (rect.width + rect.x) + 120
+
+       this.timeline.to(box, .45, {
+         opacity: 0.5,
+         scale: 1.1,
+         y: -90,
+         ease: Power3.easeOut,
+         transformOrigin:"50% 50%",
+         visibility: 'visible'
+        })
+
+        this.timeline.to(box, 1, {
+          opacity: 1,
+          x: centeredBottom,
+          y: 800,
+          ease: Power4.easeInOut,
+          scale: 0,
+          transformOrigin:"50% 50%",
+          display: 'none'
+         })
+
+    },
+    startAnimation: function(){
+       this.cartAnimation()
+       this.timeline.restart()
+       this.$nuxt.$emit('START_ANIMATION');
+    },
   }
 }
 </script>

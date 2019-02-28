@@ -1,19 +1,5 @@
 <template>
 <div>
-
-  <demo-adaptive-modal />
-  <!--<section class="uk-section">
-    <div class="uk-section uk-section-large header-container">
-      <div class="uk-container uk-container-large">
-        <div>
-          <h1 class="text-responsive">{{ interfaces.tituloencabezado }}</h1>
-          <p class="uk-width-2-5@m uk-margin">{{ interfaces.descripcion }}</p>
-
-
-        </div>
-      </div>
-    </div>-->
-
   <div class="uk-section">
     <div class="uk-container">
       <div class="uk-child-width-1-2@s uk-flex uk-flex-middle" uk-grid>
@@ -25,7 +11,7 @@
          </div>
          <div>
            <div>
-             <img uk-img src="/assets/header.png" alt="">
+             <!--<img uk-img src="/assets/header.png" alt="">-->
            </div>
          </div>
       </div>
@@ -64,7 +50,6 @@
         </div>
       </div>
     </section>
-
     <section class="uk-section uk-section-large uk-background-cover"  uk-img data-src="/assets/bg-b.svg" v-if="hlcategory">
       <div class="uk-container">
         <div class="uk-margin">
@@ -73,7 +58,7 @@
         </div>
       </div>
       <div class="uk-section padding-slider">
-        <div v-if="hlcategory.producto" uk-slider="center: true; autoplay: true; autoplay-interval: 1500; pause-on-hover: false">
+        <div v-if="hlcategory.producto" uk-slider="center: true; autoplay: true; autoplay-interval: 1500;">
           <div class="uk-slider-container">
             <ul class="uk-slider-items uk-child-width-1-6@l uk-child-width-1-4@m uk-child-width-1-2 uk-grid uk-grid-medium">
               <li v-for="product in hlcategory.producto" :key="hlcategory.producto.id">
@@ -84,8 +69,6 @@
         </div>
       </div>
     </section>
-
-
     <section class="uk-section uk-background-cover"  id="categories-section" uk-img data-src="/assets/bg-a.svg">
 
       <div class="uk-container uk-container-large">
@@ -96,8 +79,7 @@
             <p class="uk-text-capitalize uk-width-large@m uk-margin">Encuentra el producto a tu medida.</p>
           </div>
         </div>
-
-    </div>
+        </div>
 
        <div class="uk-container">
 
@@ -112,7 +94,6 @@
         </div>
 
     </section>
-
     <section class="uk-section" >
       <div class="uk-container">
 
@@ -138,7 +119,15 @@
       </div>
 
     </section>
-  </section>
+
+    <div class="uk-position-fixed uk-position-bottom-center">
+     <div class="uk-position-relative">
+       <div ref="cart"  id="cart-icon">
+         <span class="uk-icon" uk-icon="icon: cart; ratio: 3;"></span>
+       </div>
+        <div ref="bubblePulse" class="bubble-pulse"></div>
+     </div>
+ </div>
 
 </div>
 </template>
@@ -147,23 +136,95 @@
 import axios from '~/plugins/axios'
 import Product from '~/components/Product'
 import Category from '~/components/Category'
-import DemoAdaptiveModal from '~/components/ModalProduct'
+import { TimelineLite } from 'gsap'
 
 export default {
   data() {
     return {
       baseUrl: "https://say.kmeo.cl/",
+      timeline: null,
     }
   },
   components: {
     Product,
-    DemoAdaptiveModal,
     Category
+  },
+  mounted(){
+
+    var vm = this
+
+    if (process.browser) {
+    this.timeline = new TimelineLite({ paused: true })
+    this.cartAnimation()
+   }
+   this.$nuxt.$on('START_ANIMATION',function(){
+     vm.startAnimation()
+   })
   },
   computed: {
      randomizedProducts: function(){
        return this.products.sort(function(){return 0.5 - Math.random()});
      }
+  },
+  methods: {
+    cartAnimation: function(){
+
+       const { cart } = this.$refs
+       const { bubblePulse } = this.$refs
+
+       this.timeline.to(cart, .5, {
+        scale: 1,
+        opacity: 1,
+        x:0,
+        y:-80,
+       ease: Power4.easeInOut
+      })
+
+      this.timeline.to(
+            bubblePulse,
+            0.5,
+            {
+              scale: 0.9,
+              opacity: 1,
+              y: -80
+            },
+           '-=0.5'
+          )
+
+      this.timeline.to(cart, .2, {
+        scale: 1.01,
+        y: -91,
+       ease: Power4.easeInOut
+      })
+      this.timeline.to(cart, .2, {
+        scale: 1,
+       ease: Power4.easeInOut
+      })
+      this.timeline.to(cart, .5, {
+        opacity: 0,
+        scale: 1,
+         x:0,
+         y:80,
+       ease: Power4.easeInOut,
+        display: 'none'
+      })
+
+      this.timeline.to(
+       bubblePulse,
+       1.1,
+       {
+         scale: 3,
+         opacity: 0,
+         ease: Expo.easeOut,
+         display: 'none'
+       },
+       '-=1.2'
+     )
+
+    },
+    startAnimation: function(){
+       this.timeline.restart()
+    }
   },
   async asyncData({
     params
