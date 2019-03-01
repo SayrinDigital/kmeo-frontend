@@ -186,7 +186,7 @@ export default {
        .then(response => {
          // Handle success.
          console.log('weewewewew')
-         this.Pay()
+         this.Pay(response.data.id)
        })
        .catch(error => {
          // Handle error.
@@ -194,16 +194,17 @@ export default {
        });
    },
 
-    Pay(){
+    Pay(orderId){
 
       var price = this.$store.getters['cart/price']
 
       var totalprice = (price * 0.06) + price + this.despacho.precio
 
-      this.$store.commit('order/add', price)
+      this.$store.commit('order/add', orderId)
 
       axios
       .post('https://flow.kmeo.cl/flow/examples/payments/create.php',{
+        orderId: orderId
         email: this.email,
         total: totalprice,
         productos: this.productos
