@@ -55,6 +55,10 @@
         </div>
       </div>
 
+      <div class="uk-navbar-item">
+        <p>{{ orderid }}</p>
+      </div>
+
       <div class="uk-navbar-item"  z-index="99999">
         <div class="uk-position-relative">
           <nuxt-link to="/carro" uk-icon="icon: cart">
@@ -123,6 +127,9 @@ export default {
   computed: {
     numberOfItems() {
       return this.$store.getters['cart/numberOfItems']
+    },
+    orderid() {
+      return this.$store.getters['order/orderId']
     }
   },
   methods: {

@@ -16,7 +16,7 @@
             </div>
 
             <div class="uk-section uk-section-small">
-              <form class="uk-form-stacked" @submit.stop.prevent="uploadOrder">
+              <form class="uk-form-stacked" @submit.stop.prevent="generatePayment()">
 
                 <div class="uk-margin">
                   <h4 class="uk-form-label" for="form-stacked-text">Nombre</h4>
@@ -57,7 +57,7 @@
 
 
                 <div class="uk-margin uk-text-right">
-                  <button class="uk-button uk-button-large style-a" type="button" @click="generatePayment()">Ir a Pagar</button>
+                  <button class="uk-button uk-button-large style-a" type="submit">Ir a Pagar</button>
                   <p class="tiny-text">Pagar por Webpay tiene un recargo de +6%.</p>
                 </div>
 
@@ -120,7 +120,7 @@ export default {
 
   data(){
     return{
-      baseUrl : "",
+      baseUrl : "https://say.kmeo.cl",
       name: "",
       email: "",
       phone: "",
@@ -131,7 +131,6 @@ export default {
     }
   },
   beforeMount() {
-    this.baseUrl = this.$axios.defaults.baseURL
     this.loadDespacho()
     this.loadPaymentMethods()
   },
@@ -170,6 +169,9 @@ export default {
    },
 
    generatePayment(){
+
+    console.log('owo')
+
      axios
        .post(this.baseUrl + "/ordens/", {
          nombre: this.name,
@@ -183,6 +185,7 @@ export default {
        })
        .then(response => {
          // Handle success.
+         console.log('weewewewew')
          this.Pay()
        })
        .catch(error => {
@@ -197,8 +200,10 @@ export default {
 
       var totalprice = (price * 0.06) + price + this.despacho.precio
 
+      this.$store.commit('order/add', price)
+
       axios
-      .post('https://flow.privadosvip.cl/flow/examples/payments/create.php',{
+      .post('https://flow.kmeo.cl/flow/examples/payments/create.php',{
         email: this.email,
         total: totalprice,
         productos: this.productos
