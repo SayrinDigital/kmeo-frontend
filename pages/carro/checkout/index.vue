@@ -204,7 +204,7 @@ export default {
 
       axios
       .post('https://flow.kmeo.cl/flow/examples/payments/create.php',{
-        orderId: orderId
+        orderId: orderId,
         email: this.email,
         total: totalprice,
         productos: this.productos
