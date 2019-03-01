@@ -55,10 +55,6 @@
         </div>
       </div>
 
-      <div class="uk-navbar-item">
-        <p>{{ orderid }}</p>
-      </div>
-
       <div class="uk-navbar-item"  z-index="99999">
         <div class="uk-position-relative">
           <nuxt-link to="/carro" uk-icon="icon: cart">

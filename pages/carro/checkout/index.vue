@@ -203,7 +203,7 @@ export default {
       this.$store.commit('order/add', orderId)
 
       axios
-      .post('https://flow.kmeo.cl/flow/examples/payments/create.php',{
+      .post('https://kmeo.cl/flow/examples/payments/create.php',{
         orderId: orderId,
         email: this.email,
         total: totalprice,
