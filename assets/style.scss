@@ -27,6 +27,12 @@ html, body{
   overflow-x: hidden;
 }
 
+pre{
+  font-family: $t-font;
+  background: transparent;
+  border: 0;
+}
+
 .uk-navbar-container{
   z-index: 999;
 }
@@ -332,6 +338,17 @@ input.uk-input{
   font-family: $t-font;
   &:focus{
     border-color: $accent-color;
+  }
+  &.upload-input{
+    border: none;
+    background: #ec694d;
+    border-radius: 180px;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    &::placeholder{
+          color: #fff;
+    }
   }
 }
 

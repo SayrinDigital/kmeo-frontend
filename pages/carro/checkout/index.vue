@@ -46,6 +46,14 @@
                   </div>
                 </div>
 
+                <div v-if="!iswebpayenabled" class="uk-margin" uk-margin>
+                  <h4 class="uk-form-label uk-margin-remove" for="form-stacked-text">Comprobante</h4>
+                  <div  uk-form-custom="target: true">
+                    <input type="file" @change="setVoucher($event.target.name, $event.target.files)" ref="voucher">
+                    <input class="uk-input upload-input" type="text"  placeholder="Elegir Comprobante" disabled>
+                  </div>
+              </div>
+
                 <div  v-if="despacho" class="uk-margin">
                   <div v-if="despacho.mostrar">
                      <h4><input class="uk-checkbox" type="checkbox" v-model="fastsent" checked> Despacho rápido</h4>
@@ -55,10 +63,16 @@
                   </div>
                 </div>
 
+                <div v-if="isuploading" uk-spinner></div>
 
-                <div class="uk-margin uk-text-right">
+                <div v-if="iswebpayenabled" class="uk-margin uk-text-right">
                   <button class="uk-button uk-button-large style-a" type="submit">Ir a Pagar</button>
                   <p class="tiny-text">Pagar por Webpay tiene un recargo de +6%.</p>
+                </div>
+
+                <div v-else class="uk-margin uk-text-right">
+                  <button class="uk-button uk-button-large style-a" type="submit">Notificar Pago</button>
+                  <p class="tiny-text">Max. 2MB</p>
                 </div>
 
 
@@ -82,7 +96,7 @@
                   <div class="uk-width-auto@m">
                     <ul class="payment-gate uk-list"  uk-switcher="animation: uk-animation-fade; toggle: > *; connect: #component-tab-left">
                       <li v-for="pay in paymentmethods">
-                        <a href="#">
+                        <a href="#" @click="setPaymentMethod(pay.nombre)">
                               <span v-if="pay.nombre == 'Webpay'" class="uk-icon uk-margin-small-right" uk-icon="icon: credit-card"></span>
                               <span v-if="pay.nombre == 'Caja Vecina'" class="uk-icon uk-margin-small-right" uk-icon="icon: home"></span>
                               <span v-if="pay.nombre == 'Transferencia'" class="uk-icon uk-margin-small-right" uk-icon="icon: laptop"></span>
@@ -95,7 +109,7 @@
                       <li  v-for="pay in paymentmethods">
                         <div>
                           <h2>{{ pay.nombre }}</h2>
-                          <p class="uk-margin">{{ pay.descripcion }}</p>
+                          <pre class="uk-margin">{{ pay.descripcion }}</pre>
                         </div>
                       </li>
                     </ul>
@@ -127,7 +141,10 @@ export default {
       address: "",
       fastsent: false,
       despacho: null,
-      paymentmethods: []
+      paymentmethods: [],
+      iswebpayenabled: true,
+      voucherfile: null,
+      isuploading: false
     }
   },
   beforeMount() {
@@ -161,16 +178,39 @@ export default {
      .get(this.baseUrl + '/mediospagos')
      .then(response => {
          this.paymentmethods = response.data
-         console.log(this.paymentmethods)
+        // console.log(this.paymentmethods)
      })
      .catch(error => {
 
      })
    },
 
+   setVoucher(fieldName, file){
+          this.voucherfile = file[0]
+   },
+
+   setPaymentMethod(method){
+
+      switch (method) {
+        case "Webpay":
+           this.iswebpayenabled = true
+          break;
+          case "Caja Vecina":
+             this.iswebpayenabled = false
+            break;
+            case "Transferencia":
+               this.iswebpayenabled = false
+              break;
+        default:
+
+      }
+
+   },
+
    generatePayment(){
 
-    console.log('owo')
+
+          this.isuploading = true
 
      axios
        .post(this.baseUrl + "/ordens/", {
@@ -185,13 +225,49 @@ export default {
        })
        .then(response => {
          // Handle success.
-         console.log('weewewewew')
-         this.Pay(response.data.id)
+         //console.log(response.data)
+
+         if(this.iswebpayenabled){
+             this.Pay(response.data.id)
+         }else{
+           let data = new FormData()
+              data.append('files', this.voucherfile)
+              data.append('refId', response.data.id)
+              data.append('ref', 'orden')
+              data.append('field', 'voucher')
+
+              this.uploadFile(data)
+
+         }
+
+
+
        })
        .catch(error => {
          // Handle error.
          console.log('An error occurred:', error);
        });
+   },
+
+   uploadFile(data){
+
+
+     axios
+        .post(this.baseUrl + '/upload/',
+          data, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+        .then(response => {
+          this.isuploading = false
+          console.log(response.data)
+        })
+        .catch(error => {
+          // Handle error.
+          this.isuploading = false
+          console.log('An error occurred:', error);
+        });
    },
 
     Pay(orderId){
@@ -210,13 +286,16 @@ export default {
         productos: this.productos
       })
       .then(response => {
+
+          this.isuploading = false
+
           var order = response.data
           if(order.url && this.despacho){
           window.location.href = order.url + "?token=" + order.token
         }
       })
       .catch(error => {
-
+             this.isuploading = false
       })
 
     }
