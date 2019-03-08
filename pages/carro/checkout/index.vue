@@ -46,11 +46,11 @@
                   </div>
                 </div>
 
-                <div class="uk-margin">
-                  <div>
+                <div  v-if="despacho" class="uk-margin">
+                  <div v-if="despacho.mostrar">
                      <h4><input class="uk-checkbox" type="checkbox" v-model="fastsent" checked> Despacho rápido</h4>
                      <div uk-dropdown>
-                       <div><p v-if="despacho">{{ despacho.detalles }}</p></div>
+                       <div><p >{{ despacho.detalles }}</p></div>
                      </div>
                   </div>
                 </div>

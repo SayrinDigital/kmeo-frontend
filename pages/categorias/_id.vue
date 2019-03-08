@@ -24,8 +24,8 @@
   <div class="uk-container">
     <div class="uk-section">
       <div class="uk-grid  uk-grid-match uk-child-width-1-4@l uk-child-width-1-3@m uk-child-width-1-2" uk-scrollspy="cls: uk-animation-fade; target: > div > .product-container; delay: 200;" uk-grid>
-        <div v-for="product in filteredProducts" :key="category.producto.id">
-          <Product :product="product"></Product>
+        <div  v-if="product.mostrar"  v-for="product in filteredProducts" :key="category.producto.id">
+          <Product  :product="product"></Product>
         </div>
       </div>
     </div>

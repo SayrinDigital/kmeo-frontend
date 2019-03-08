@@ -31,6 +31,11 @@ html, body{
   z-index: 999;
 }
 
+.whatsapp-icon{
+    background-color: #4AC959;
+    color: #fff;
+}
+
 .fixed-loader{
   background: $hl-color;
   top: 0;
@@ -500,7 +505,7 @@ button.uk-button{
   }
 }
 
-.uk-icon-button{
+.uk-icon-button-b{
   background: #59dbf2;
   color: #fff;
   transition: all 200ms ease-in-out;

@@ -14,11 +14,11 @@
       </div>
       <div class="uk-width-1-5@m uk-text-center ">
         <div class="uk-section uk-text-center">
-          <ul class="uk-iconnav uk-flex-inline">
-            <li><a href="#" uk-icon="icon: facebook"></a></li>
-            <li><a href="#" uk-icon="icon: instagram"></a></li>
-            <li><a href="#" uk-icon="icon: whatsapp"></a></li>
-          </ul>
+          <div>
+            <a href="https://www.instagram.com/kmeo.cl/" class="uk-icon-button uk-margin-small-right" uk-icon="instagram"></a>
+            <a href="https://www.facebook.com/kmeo.cl" class="uk-icon-button  uk-margin-small-right" uk-icon="facebook"></a>
+            <a href="" class="uk-icon-button whatsapp-icon" uk-icon="whatsapp"></a>
+</div>
         </div>
       </div>
     </div>

@@ -64,8 +64,8 @@
           <div v-if="hlcategory.producto" uk-slider="autoplay: true; autoplay-interval: 1500;">
             <div class="uk-slider-container">
               <ul class="uk-slider-items uk-child-width-1-6@l uk-child-width-1-4@m uk-child-width-1-2 uk-grid uk-grid-medium">
-                <li v-for="product in hlcategory.producto" :key="hlcategory.producto.id">
-                    <Product :product="product"></Product>
+                <li v-if="product.mostrar" v-for="product in hlcategory.producto" :key="hlcategory.producto.id">
+                    <Product   :product="product"></Product>
                 </li>
               </ul>
             </div>
@@ -114,8 +114,8 @@
 
           <div class="uk-section product-section">
             <div class="uk-grid uk-child-width-1-4@l uk-child-width-1-3@m uk-child-width-1-2 uk-grid-match uk-grid-medium" uk-grid>
-              <div v-for="product in randomizedProducts" :key="product.id">
-                <Product :product="product"></Product>
+              <div v-if="product.mostrar"  v-for="product in randomizedProducts" :key="product.id">
+                <Product  :product="product"></Product>
               </div>
 
             </div>

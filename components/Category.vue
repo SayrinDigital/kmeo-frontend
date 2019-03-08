@@ -1,6 +1,6 @@
 <template>
 
-  <div v-if="category">
+  <div v-if="category.mostrar">
       <div>
         <div class="category-container">
           <div class="image-container uk-position-center-right uk-height-1-1 uk-width-3-5 uk-background-cover " :style="'background-image: url('+baseUrl + category.imagen.url+');'">

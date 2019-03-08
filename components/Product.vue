@@ -24,7 +24,7 @@
               </div>
               <div class="uk-width-auto@s">
                 <div class=" uk-text-right">
-                  <a @click="addProduct(product)" uk-tooltip="Agregar Al Carro" class="addtocartbutton uk-icon-button" uk-icon="cart"></a>
+                  <a @click="addProduct(product)" uk-tooltip="Agregar Al Carro" class="addtocartbutton uk-icon-button uk-icon-button-b" uk-icon="cart"></a>
                 </div>
               </div>
             </div>

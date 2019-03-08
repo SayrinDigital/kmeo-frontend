@@ -39,7 +39,7 @@
           <ul class="uk-nav uk-list-large uk-dropdown-nav">
             <li v-for="category in categories" :key="category.id">
 
-              <nuxt-link tag="a" :to="{ name: 'categorias-id', params: { id: category.id }}" >
+              <nuxt-link v-if="category.mostrar" tag="a" :to="{ name: 'categorias-id', params: { id: category.id }}" >
                 <div class="category-container">
                   <div class="image-container uk-position-center-right uk-height-1-1 uk-width-3-5 uk-background-cover " uk-img :data-src="baseUrl + category.imagen.url">
                   </div>
