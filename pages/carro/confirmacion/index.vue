@@ -8,10 +8,14 @@
               <p class="uk-width-2-5@m">Compra</p>
               <h1 class="text-responsive">Confirmación de Pago</h1>
               <div>
-                <h3 class="uk-margin">Pago Realizado</h3>
+                <!--<h3 class="uk-margin">Pago Realizado</h3>-->
+                <p class="uk-margin-bottom">Estamos a 1 paso de terminar la compra. Finaliza la compra para recibir el comprobante en tu correo provisto.</p>
                 <div v-if="isspinnershown" uk-spinner></div>
-                <button v-else @click="endBuy" class="uk-button style-a">Finalizar Compra</button>
-                <button type="button" @click="sendmail('josepuma@sayrin.cl')">send</button>
+                <div v-else>
+                  <button  @click="endBuy" class="uk-button style-a">Finalizar Compra</button>
+                  <p class="tiny-text">Al Finalizar la Compra recibirás un comprobante de pago en tu mail.</p>
+                </div>
+
               </div>
             </div>
           </div>
@@ -24,6 +28,9 @@
 
 <script>
   import axios from '~/plugins/axios'
+  if(process.browser){
+  const sgMail = require('@sendgrid/mail');
+  }
 
   export default{
     data(){
@@ -95,6 +102,7 @@
        updateOrder(id, value){
 
          var status = this.getStatus(value)
+         var vm = this;
          console.log(status)
 
          axios
@@ -104,7 +112,9 @@
             .then(response => {
               this.$store.commit('order/emptyOrder')
               this.$store.commit('cart/emptyList')
-              this.sendMail('josepuma@sayrin.cl')
+              if(value == 2){
+                vm.sendMail(id)
+              }
               this.$router.push('/')
               this.isspinnershown = false
             })
@@ -114,53 +124,72 @@
               console.log('An error occurred:', error);
             });
        },
-       sendmail(to){
+       sendmail(id){
 
-         const sgMail = require('@sendgrid/mail');
-         sgMail.setApiKey('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');
-         var paymentdone = "d-1f579c58b94a4ae48d0a72ef4f87411b"
-         var notification = "d-bf8d8e54e7c3452ca4f2b3e7b236a57f"
-         /*var order = null
+
+         sgMail.setApiKey('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');
+         var paymentdone = "d-9586ff90db154c56b1dd0cdf3ae9f52c"
+         var notification = "d-c427f97c2ab44c9c95a254b9cfdd5bf8"
+         var order = null
          axios
-         .get('https://say.kmeo.cl/ordens/' + '5c83086da9ff9d1c28be2515')
+         .get('https://say.kmeo.cl/ordens/' + id)
          .then(response => {
            order = response.data
-           console.log(order)
-         })*/
-
-
-         /*const msg = {
-             to: 'josepuma@sayrin.cl',
-             from: 'ventas@kmeo.cl',
-             dynamic_template_data:{
-                name: order.nombre,
-                total: order.total,
-                productos: order.productos,
-                phone: order.telefono,
-                mail: order.email,
-                address: order.direccion,
-             },
-             template_id: notification,
-
-           };*/
 
            const msg = {
-               to: 'josepuma@sayrin.cl',
-               from: 'ventas@kmeo.cl',
-               personalizations: [{
-                 dynamic_template_data: {
-                    name: "José Puma",
-                    total: "10990",
-                    productos: [],
-                    phone: "+56940444172",
-                    mail: "josepuma@sayrin.cl",
-                    address: "Monjitas 550",
-                 }}],
+               to: 'ventas@kmeo.cl',
+               from: 'josepuma@kmeo.cl',
+               subject: 'Notificación de Pago',
+               personalizations: [
+            {
+              to: {
+                name: 'Ventas',
+                email: 'ventas@kmeo.cl'
+              },
+              dynamic_template_data: {
+                id: order.id,
+                nombre: order.nombre,
+                email: order.email,
+                telefono: order.telefono,
+                address: order.direccion,
+                total : order.total,
+                productos: order.productos,
+                despachorapido: order.despachorapido
+              }
+            }
+          ],
                template_id: notification,
 
              };
 
-         sgMail.send(msg);
+                     sgMail.send(msg);
+
+
+
+             const msgclient = {
+                 to: order.email,
+                 from: 'ventas@kmeo.cl',
+                 subject: 'Área de Ventas Kmeo',
+                 personalizations: [
+              {
+                to: {
+                  name: order.nombre,
+                  email: order.email
+                },
+                dynamic_template_data: {
+                  id: order.id
+                }
+              }
+            ],
+                 template_id: paymentdone,
+
+               };
+
+            sgMail.send(msgclient);
+
+            this.$store.commit('order/emptyOrder')
+
+         })
 
 
        }

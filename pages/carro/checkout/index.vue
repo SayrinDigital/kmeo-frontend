@@ -1,7 +1,7 @@
 <template>
 <div>
   <section class="header-container uk-background-cover"  uk-img data-src="/assets/bg-a.svg">
-    <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
+    <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex uk-flex-middle" uk-grid>
       <div uk-height-viewport>
 
         <div class="uk-padding-large uk-width-4-5 uk-margin-auto">
@@ -84,7 +84,7 @@
 
       </div>
       <div class="uk-flex-first">
-        <div class="uk-section uk-section-large">
+        <div class="uk-section">
           <div class="uk-container">
             <div class="uk-width-4-5@m uk-margin-auto uk-text-center uk-text-left@s">
               <h1 class="uk-margin-top">Medios de Pago</h1>
@@ -129,6 +129,14 @@
 <script>
 
 import axios from 'axios'
+
+let UIkit
+let sgMail
+
+if(process.browser){
+  UIkit = require('uikit')
+  sgMail = require('@sendgrid/mail');
+}
 
 export default {
 
@@ -236,7 +244,7 @@ export default {
               data.append('ref', 'orden')
               data.append('field', 'voucher')
 
-              this.uploadFile(data)
+              this.uploadFile(data, response.data.id)
 
          }
 
@@ -249,7 +257,7 @@ export default {
        });
    },
 
-   uploadFile(data){
+   uploadFile(data, orderId){
 
 
      axios
@@ -260,8 +268,8 @@ export default {
             }
           })
         .then(response => {
-          this.isuploading = false
-          console.log(response.data)
+          this.$store.commit('order/add', orderId)
+          this.notifyPayment(orderId)
         })
         .catch(error => {
           // Handle error.
@@ -269,6 +277,82 @@ export default {
           console.log('An error occurred:', error);
         });
    },
+
+   notifyPayment(id){
+
+
+     sgMail.setApiKey('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');
+     var paymentdone = "d-9586ff90db154c56b1dd0cdf3ae9f52c"
+     var notification = "d-c427f97c2ab44c9c95a254b9cfdd5bf8"
+     var order = null
+     axios
+     .get('https://say.kmeo.cl/ordens/' + id)
+     .then(response => {
+       order = response.data
+       const msg = {
+           to: 'ventas@kmeo.cl',
+           from: 'josepuma@kmeo.cl',
+           subject: 'Notificación de Pago',
+           personalizations: [
+        {
+          to: {
+            name: 'Ventas',
+            email: 'ventas@kmeo.cl'
+          },
+          dynamic_template_data: {
+            id: order.id,
+            nombre: order.nombre,
+            email: order.email,
+            telefono: order.telefono,
+            address: order.direccion,
+            total : order.total,
+            productos: order.productos,
+            despachorapido: order.despachorapido
+          }
+        }
+      ],
+           template_id: notification,
+
+         };
+
+                 sgMail.send(msg);
+
+
+
+         const msgclient = {
+             to: order.email,
+             from: 'ventas@kmeo.cl',
+             subject: 'Área de Ventas Kmeo',
+             personalizations: [
+          {
+            to: {
+              name: order.nombre,
+              email: order.email
+            },
+            dynamic_template_data: {
+              id: order.id
+            }
+          }
+        ],
+             template_id: paymentdone,
+
+           };
+
+        sgMail.send(msgclient);
+                  this.isuploading = false
+                  this.$store.commit('order/emptyOrder')
+                  if(process.browser){
+                    UIkit.notification({
+                    message: 'Recibimos tu notificación de pago!',
+                    status: 'primary',
+                    pos: 'top-center',
+                    timeout: 5000
+                });
+              }
+     })
+   },
+
+   //sendNotificationMail(id)
 
     Pay(orderId){
 
