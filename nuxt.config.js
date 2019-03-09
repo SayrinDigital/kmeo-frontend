@@ -75,7 +75,12 @@ module.exports = {
       'gsap',
     ],
     extend(config, ctx) {
-
+      config.node = {
+              console: true,
+              fs: 'empty',
+              net:'empty',
+              tls:'empty',
+            }
     }
   }
 }

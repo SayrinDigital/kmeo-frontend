@@ -33,10 +33,6 @@
         <nuxt-link to="/faq" class="uk-button-text">Preguntas Frecuentes</nuxt-link>
       </div>
 
-      <div class="uk-navbar-item">
-        <p>{{ orderid }}</p>
-      </div>
-
       <div class="uk-navbar-item uk-visible@m">
         <a class="uk-button-text">Categorías <span class="uk-icon uk-margin-small-left" uk-icon="icon: chevron-down"></span></a>
         <div class="dropdown-categories uk-width-large" uk-dropdown="animation: uk-animation-slide-top-small; duration: 500">

@@ -369,6 +369,7 @@ button.uk-button{
     border-radius: 180px;
     background: $hl-color;
     color: #fff;
+    text-transform: capitalize;
     &:active{
       transform: scale(1.1) translateY(-10px);
     }
