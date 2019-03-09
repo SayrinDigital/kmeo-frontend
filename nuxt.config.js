@@ -3,6 +3,9 @@ import axios from 'axios'
 
 module.exports = {
   mode: 'universal',
+  optimization: {
+    minimize: false
+  },
 
   /*
   ** Headers of the page
@@ -73,17 +76,7 @@ module.exports = {
   ** Build configuration
   */
   build: {
-  minimize: false,
-  minimizer: [
-    // terser-webpack-plugin
-    // optimize-css-assets-webpack-plugin
-  ],
-  splitChunks: {
-    chunks: 'all',
-    automaticNameDelimiter: '.',
-    name: undefined,
-    cacheGroups: {}
-  },
+
     vendor: [
       'gsap',
     ],
