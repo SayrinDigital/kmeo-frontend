@@ -3,10 +3,15 @@ import axios from 'axios'
 
 module.exports = {
   mode: 'universal',
-
+  optimization:{
+          minimize: false, // <---- disables uglify.
+          // minimizer: [new UglifyJsPlugin()] if you want to customize it.
+      },
   /*
   ** Headers of the page
   */
+
+
   head: {
     title: 'Kmeo | Tienda Online',
     meta: [
@@ -45,6 +50,7 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
   ],
+
 
   serverMiddleware: ['~/api/index.js'],
   /*
