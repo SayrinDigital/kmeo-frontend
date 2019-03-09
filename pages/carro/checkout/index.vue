@@ -76,6 +76,9 @@
                 </div>
 
 
+                        <button class="uk-button" type="button" @click="sendMail">Test</button>
+
+
               </form>
             </div>
 
@@ -350,6 +353,17 @@ export default {
                 });
               }
      })
+   },
+
+   sendMail(){
+        axios
+        .post('/api/mail')
+        .then(response => {
+            console.log(response)
+        })
+        .catch(error => {
+            console.log(error)
+        })
    },
 
    //sendNotificationMail(id)
