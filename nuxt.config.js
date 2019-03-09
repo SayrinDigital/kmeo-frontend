@@ -73,14 +73,17 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    /*
-    ** You can extend webpack config here
-    */uglify: {
-      uglifyOptions: {
-        compress: false
-      },
-      
-    },
+  minimize: false,
+  minimizer: [
+    // terser-webpack-plugin
+    // optimize-css-assets-webpack-plugin
+  ],
+  splitChunks: {
+    chunks: 'all',
+    automaticNameDelimiter: '.',
+    name: undefined,
+    cacheGroups: {}
+  },
     vendor: [
       'gsap',
     ],
