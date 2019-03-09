@@ -3,10 +3,7 @@ import axios from 'axios'
 
 module.exports = {
   mode: 'universal',
-  optimization:{
-          minimize: false, // <---- disables uglify.
-          // minimizer: [new UglifyJsPlugin()] if you want to customize it.
-      },
+
   /*
   ** Headers of the page
   */
@@ -78,7 +75,12 @@ module.exports = {
   build: {
     /*
     ** You can extend webpack config here
-    */
+    */uglify: {
+      uglifyOptions: {
+        compress: false
+      },
+      
+    },
     vendor: [
       'gsap',
     ],
