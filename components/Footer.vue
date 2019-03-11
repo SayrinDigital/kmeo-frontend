@@ -17,7 +17,6 @@
           <div>
             <a href="https://www.instagram.com/kmeo.cl/" class="uk-icon-button uk-margin-small-right" uk-icon="instagram"></a>
             <a href="https://www.facebook.com/kmeo.cl" class="uk-icon-button  uk-margin-small-right" uk-icon="facebook"></a>
-            <a href="" class="uk-icon-button whatsapp-icon" uk-icon="whatsapp"></a>
 </div>
         </div>
       </div>

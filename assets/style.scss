@@ -27,6 +27,10 @@ html, body{
   overflow-x: hidden;
 }
 
+.uk-dropdown{
+  border-radius: 5px;
+}
+
 pre{
   font-family: $t-font;
   background: transparent;
@@ -40,6 +44,8 @@ pre{
 .whatsapp-icon{
     background-color: #4AC959;
     color: #fff;
+    width: 72px;
+    height: 72px;
 }
 
 .fixed-loader{
