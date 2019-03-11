@@ -136,7 +136,7 @@
        },
        sendNotify(order){
             axios
-            .post('/api/mail',{
+            .post('https://kmeo.cl/api/mail',{
               email: order.email,
               nombre: order.nombre,
               id: order.id
@@ -150,7 +150,7 @@
             })
 
             axios
-            .post('/api/notifyorder',{
+            .post('https://kmeo.cl/api/notifyorder',{
               email: order.email,
               nombre: order.nombre,
               id: order.id,
