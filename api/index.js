@@ -7,14 +7,13 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 app.get('/', (req, res, next) => {
   res.send('API root')
 })
 
 app.all('/mail', (req, res, next) => {
-  //sgMail.setApiKey('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')
-sgMail.setApiKey('')
 
 const msgclient = {
     to: req.body.email,
@@ -27,24 +26,24 @@ const msgclient = {
      email: req.body.email
    },
    dynamic_template_data: {
-     id: red.body.id
+     id: req.body.id
    }
  }
 ],
-    template_id: 'd-6ba8b93ac3ca4dcdbb0c30a27679de88',
+    template_id: 'd-ca20d33683b940918cd4ba55bcf88882',
 
   };
 
   sgMail.send(msgclient, function(err, json) {
   if (err) { res.send("error"); }
-  res.send(json);
+  else{
+    res.send(json);
+  }
 });
 
 })
 
 app.all('/notifyorder', (req, res, next) => {
-  //sgMail.setApiKey('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')
-sgMail.setApiKey('')
 
 const msg = {
     to: 'ventas@kmeo.cl',
@@ -52,10 +51,16 @@ const msg = {
     subject: 'Notificación de Pago',
     personalizations: [
  {
-   to: {
-     name: 'Ventas',
-     email: 'ventas@kmeo.cl'
-   },
+   to: [
+     {
+       name: 'Ventas',
+       email: 'ventas@kmeo.cl'
+     },
+     {
+       name: 'Prueba',
+       email: 'josepuma@sayrin.cl'
+     }
+   ],
    dynamic_template_data: {
      id: req.body.id,
      nombre: req.body.nombre,
@@ -68,13 +73,15 @@ const msg = {
    }
  }
 ],
-    template_id: "d-c427f97c2ab44c9c95a254b9cfdd5bf8",
+    template_id: "d-063ae6178f6346778c8a10704261f6de",
 
   };
 
   sgMail.send(msg, function(err, json) {
   if (err) { res.send("error"); }
-  res.send(json);
+  else{
+    res.send(json);
+  }
 });
 
 })

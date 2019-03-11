@@ -134,11 +134,9 @@
 import axios from 'axios'
 
 let UIkit
-let sgMail
 
 if(process.browser){
   UIkit = require('uikit')
-  sgMail = require('@sendgrid/mail');
 }
 
 export default {
@@ -273,6 +271,7 @@ export default {
         .then(response => {
           this.$store.commit('order/add', orderId)
           this.notifyPayment(orderId)
+          this.$store.commit('order/emptyOrder')
         })
         .catch(error => {
           // Handle error.
@@ -282,9 +281,6 @@ export default {
    },
 
    notifyPayment(id){
-
-
-     sgMail.setApiKey('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');
      var paymentdone = "d-9586ff90db154c56b1dd0cdf3ae9f52c"
      var notification = "d-c427f97c2ab44c9c95a254b9cfdd5bf8"
      var order = null
@@ -292,56 +288,9 @@ export default {
      .get('https://say.kmeo.cl/ordens/' + id)
      .then(response => {
        order = response.data
-       const msg = {
-           to: 'ventas@kmeo.cl',
-           from: 'josepuma@kmeo.cl',
-           subject: 'Notificación de Pago',
-           personalizations: [
-        {
-          to: {
-            name: 'Ventas',
-            email: 'ventas@kmeo.cl'
-          },
-          dynamic_template_data: {
-            id: order.id,
-            nombre: order.nombre,
-            email: order.email,
-            telefono: order.telefono,
-            address: order.direccion,
-            total : order.total,
-            productos: order.productos,
-            despachorapido: order.despachorapido
-          }
-        }
-      ],
-           template_id: notification,
 
-         };
+       this.sendMail(order)
 
-                 sgMail.send(msg);
-
-
-
-         const msgclient = {
-             to: order.email,
-             from: 'ventas@kmeo.cl',
-             subject: 'Área de Ventas Kmeo',
-             personalizations: [
-          {
-            to: {
-              name: order.nombre,
-              email: order.email
-            },
-            dynamic_template_data: {
-              id: order.id
-            }
-          }
-        ],
-             template_id: paymentdone,
-
-           };
-
-        sgMail.send(msgclient);
                   this.isuploading = false
                   this.$store.commit('order/emptyOrder')
                   if(process.browser){
@@ -355,12 +304,30 @@ export default {
      })
    },
 
-   sendMail(){
+   sendMail(order){
         axios
         .post('/api/mail',{
-          email: 'josepuma@sayrin.cl',
-          nombre: 'José Puma',
-          id: '2929292'
+          email: order.email,
+          nombre: order.nombre,
+          id: order.id
+        })
+        .then(response => {
+            console.log(response)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+
+        axios
+        .post('/api/notifyorder',{
+          email: order.email,
+          nombre: order.nombre,
+          id: order.id,
+          telefono: order.telefono,
+          direccion: order.direccion,
+          total: order.total,
+          productos: order.productos,
+          despachorapido: order.despachorapido
         })
         .then(response => {
             console.log(response)

@@ -114,7 +114,7 @@
 
           <div class="uk-section product-section">
             <div class="uk-grid uk-child-width-1-4@l uk-child-width-1-3@m uk-child-width-1-2 uk-grid-match uk-grid-medium" uk-grid>
-              <div v-if="product.mostrar"  v-for="product in randomizedProducts" :key="product.id">
+              <div v-if="product.mostrar" v-for="product in randomizedProducts" :key="product.id">
                 <Product  :product="product"></Product>
               </div>
 

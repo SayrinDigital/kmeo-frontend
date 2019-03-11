@@ -28,10 +28,6 @@
 
 <script>
   import axios from '~/plugins/axios'
-  if(process.browser){
-  const sgMail = require('@sendgrid/mail');
-  }
-
   export default{
     data(){
       return{
@@ -125,74 +121,50 @@
             });
        },
        sendmail(id){
-
-
-         sgMail.setApiKey('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');
-         var paymentdone = "d-9586ff90db154c56b1dd0cdf3ae9f52c"
-         var notification = "d-c427f97c2ab44c9c95a254b9cfdd5bf8"
          var order = null
          axios
          .get('https://say.kmeo.cl/ordens/' + id)
          .then(response => {
            order = response.data
-
-           const msg = {
-               to: 'ventas@kmeo.cl',
-               from: 'josepuma@kmeo.cl',
-               subject: 'Notificación de Pago',
-               personalizations: [
-            {
-              to: {
-                name: 'Ventas',
-                email: 'ventas@kmeo.cl'
-              },
-              dynamic_template_data: {
-                id: order.id,
-                nombre: order.nombre,
-                email: order.email,
-                telefono: order.telefono,
-                address: order.direccion,
-                total : order.total,
-                productos: order.productos,
-                despachorapido: order.despachorapido
-              }
-            }
-          ],
-               template_id: notification,
-
-             };
-
-                     sgMail.send(msg);
-
-
-
-             const msgclient = {
-                 to: order.email,
-                 from: 'ventas@kmeo.cl',
-                 subject: 'Área de Ventas Kmeo',
-                 personalizations: [
-              {
-                to: {
-                  name: order.nombre,
-                  email: order.email
-                },
-                dynamic_template_data: {
-                  id: order.id
-                }
-              }
-            ],
-                 template_id: paymentdone,
-
-               };
-
-            sgMail.send(msgclient);
-
+          this.sendNotify(order)
             this.$store.commit('order/emptyOrder')
 
          })
 
 
-       }
+       },
+       sendMNotify(order){
+            axios
+            .post('/api/mail',{
+              email: order.email,
+              nombre: order.nombre,
+              id: order.id
+            })
+            .then(response => {
+                //console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+            axios
+            .post('/api/notifyorder',{
+              email: order.email,
+              nombre: order.nombre,
+              id: order.id,
+              telefono: order.telefono,
+              direccion: order.direccion,
+              total: order.total,
+              productos: order.productos,
+              despachorapido: order.despachorapido
+            })
+            .then(response => {
+                //console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+       },
     }
   }
 
