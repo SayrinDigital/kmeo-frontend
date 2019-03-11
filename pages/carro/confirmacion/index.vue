@@ -109,7 +109,7 @@
               this.$store.commit('order/emptyOrder')
               this.$store.commit('cart/emptyList')
               if(value == 2){
-                vm.sendmail(id)
+                this.sendmail(id)
               }
               this.$router.push('/')
               this.isspinnershown = false
@@ -134,7 +134,7 @@
 
 
        },
-       sendMNotify(order){
+       sendNotify(order){
             axios
             .post('/api/mail',{
               email: order.email,
@@ -142,6 +142,7 @@
               id: order.id
             })
             .then(response => {
+              console.log('sent')
                 //console.log(response)
             })
             .catch(error => {
