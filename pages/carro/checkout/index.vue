@@ -76,9 +76,6 @@
                 </div>
 
 
-                        <button class="uk-button" type="button" @click="sendMail">Test</button>
-
-
               </form>
             </div>
 
