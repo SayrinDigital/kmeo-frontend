@@ -22,6 +22,7 @@
     "gsap": "^2.1.1",
     "install": "^0.12.2",
     "net": "^1.0.2",
+    "nodemailer": "^5.1.1",
     "nuxt": "^2.4.0",
     "nuxt-express-module": "0.0.11",
     "strapi-sdk-javascript": "^0.3.1",
