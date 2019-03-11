@@ -83,7 +83,7 @@
       },
        getOrder(id){
          axios
-            .post('https://flow.kmeo.cl//payments/getStatusByCommerceId.php',{
+            .post('https://flow.kmeo.cl/payments/getStatusByCommerceId.php',{
                 orderId: id
             })
             .then(response => {
