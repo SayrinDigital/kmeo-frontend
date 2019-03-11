@@ -345,7 +345,7 @@ export default {
       this.$store.commit('order/add', orderId)
 
       axios
-      .post('https://kmeo.cl/flow/examples/payments/create.php',{
+      .post('https://flow.kmeo.cl/payments/create.php',{
         orderId: orderId,
         email: this.email,
         total: totalprice,
