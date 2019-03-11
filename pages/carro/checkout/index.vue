@@ -312,7 +312,7 @@ export default {
           id: order.id
         })
         .then(response => {
-            console.log(response)
+            //console.log(response)
         })
         .catch(error => {
             console.log(error)
@@ -330,7 +330,7 @@ export default {
           despachorapido: order.despachorapido
         })
         .then(response => {
-            console.log(response)
+            //console.log(response)
         })
         .catch(error => {
             console.log(error)
