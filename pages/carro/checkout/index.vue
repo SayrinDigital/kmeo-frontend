@@ -357,7 +357,11 @@ export default {
 
    sendMail(){
         axios
-        .post('/api/mail')
+        .post('/api/mail',{
+          email: 'josepuma@sayrin.cl',
+          nombre: 'José Puma',
+          id: '2929292'
+        })
         .then(response => {
             console.log(response)
         })
