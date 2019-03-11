@@ -109,7 +109,7 @@
               this.$store.commit('order/emptyOrder')
               this.$store.commit('cart/emptyList')
               if(value == 2){
-                vm.sendMail(id)
+                vm.sendmail(id)
               }
               this.$router.push('/')
               this.isspinnershown = false
@@ -120,6 +120,7 @@
               console.log('An error occurred:', error);
             });
        },
+
        sendmail(id){
          var order = null
          axios
