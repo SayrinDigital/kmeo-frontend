@@ -14,7 +14,7 @@ app.get('/', (req, res, next) => {
 
 app.all('/mail', (req, res, next) => {
   //sgMail.setApiKey('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')
-sgMail.setApiKey('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')
+sgMail.setApiKey('')
 
 const msgclient = {
     to: req.body.email,
@@ -44,7 +44,7 @@ const msgclient = {
 
 app.all('/notifyorder', (req, res, next) => {
   //sgMail.setApiKey('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')
-sgMail.setApiKey('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')
+sgMail.setApiKey('')
 
 const msg = {
     to: 'ventas@kmeo.cl',
