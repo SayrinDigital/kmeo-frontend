@@ -57,7 +57,7 @@ app.all('/mail', (req, res, next) => {
   });
 
   const mailOptions = {
-    from: 'Área de Ventas Kmeo <ventas@kmeo.cl>', // sender address
+    from: 'Área de Ventas Kmeo <joscri2698@gmail.com>',  // sender address
     to: req.body.email, // list of receivers
     replyTo: 'ventas@kmeo.cl',
     subject: 'Área de Ventas Kmeo', // Subject line
