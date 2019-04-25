@@ -3,7 +3,7 @@
     <no-ssr><Navigator></Navigator></no-ssr>
     <nuxt />
     <no-ssr><Footer></Footer></no-ssr>
-    <div class="uk-position-fixed uk-position-bottom-right uk-overlay">
+    <div class="uk-position-fixed uk-position-bottom-right uk-overlay" style="z-index: 99;">
       <div>
         <a href="https://api.whatsapp.com/send?phone=+56941639399&amp;text=Hola%20tengo%20una%20duda%20por%20un%20producto%20que%20vi%20en%20la%20pagina" class="uk-icon-button whatsapp-icon" uk-icon="icon: whatsapp; ratio: 2"></a>
     </div>

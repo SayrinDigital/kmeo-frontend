@@ -24,7 +24,7 @@
           </div>
         </div>
         <div class="uk-section">
-          <div class="uk-grid uk-grid-medium uk-child-width-1-4@l uk-child-width-1-3@m uk-child-width-1-2@s uk-child-width-1-2" uk-scrollspy="cls: uk-animation-fade; target: > div > .product-container; delay: 400; repeat: true" uk-grid>
+          <div class="uk-grid uk-grid-medium uk-child-width-1-5@l uk-child-width-1-3@m uk-child-width-1-2@s uk-child-width-1-2" uk-scrollspy="cls: uk-animation-fade; target: > div > .product-container; delay: 400; repeat: true" uk-grid>
             <div v-for="product in selectedProducts">
               <Product :product="product"></Product>
             </div>

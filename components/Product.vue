@@ -1,7 +1,34 @@
 <template>
 
-<div class="uk-height-1-1" >
-  <div class="uk-height-1-1" >
+<div class="uk-height-1-1 p-card " :uk-tooltip="product.description" v-if="product">
+  <div v-if="product.fotos" class="uk-text-center uk-position-relative uk-transition-toggle">
+    <div class="uk-inline-clip">
+      <img v-if="product.fotos.frontal" :src="baseUrl + product.fotos.frontal.url" alt="">
+      <img class="uk-transition-scale-up uk-position-cover" v-if="product.fotos.extra" :src="baseUrl + product.fotos.extra.url" alt="">
+    </div>
+
+     <div class="uk-margin">
+       <h5 v-if="product.marca.nombre" >{{ product.marca.nombre }}</h5>
+       <h5 class="uk-visible@s" v-else>Novedades</h5>
+       <h4>{{ product.nombre }}</h4>
+     </div>
+     <div class="uk-margin">
+       <p class="oldprice uk-margin-remove">{{ product.precioreferencial | currency('$', 0)}} CLP</p>
+       <p class="price">{{ product.preciofinal | currency('$', 0)}} CLP</p>
+     </div>
+     <div class="uk-margin">
+       <a @click="addProduct(product)" uk-tooltip="Agregar Al Carro" class="addtocart uk-button"><span class="uk-icon" uk-icon="cart"></span></a>
+     </div>
+     <div class="uk-position-top-right">
+       <div class="uk-overlay">
+         <div class="dscto">{{ discountPercetange }} %</div>
+       </div>
+     </div>
+     <div class="box-hover-product" ref="box">
+       <img class="uk-border-rounded" v-if="product.fotos.frontal" :src="baseUrl + product.fotos.frontal.url" alt="">
+     </div>
+  </div>
+  <!--<div class="uk-height-1-1" >
     <div :uk-tooltip="product.descripcion" class="cursor-pointer product-container uk-height-1-1  uk-transition-toggle uk-position-relative" v-if="product.fotos">
       <div class="content uk-height-1-1">
         <div class="uk-inline-clip">
@@ -55,8 +82,9 @@
               </div>
              </div>
         </div>
-  </div>
+  </div>-->
 </div>
+
 
 </template>
 

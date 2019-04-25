@@ -1,26 +1,27 @@
 @font-face {
- font-family: 'Apercu Bold';
- src: url('/fonts/apercu_bold_pro.otf');
+ font-family: 'Manrope Bold';
+ src: url('/fonts/manrope-bold.woff2');
  font-weight: normal;
  font-style: normal;
 }
 
 @font-face {
- font-family: 'Apercu Regular';
- src: url('/fonts/apercu_regular_pro.otf');
+ font-family: 'Manrope Regular';
+ src: url('/fonts/manrope-regular.woff2');
  font-weight: normal;
  font-style: normal;
 }
 
 
-$main-background: rgba(242,242,242,1);
-$h-font: 'Apercu Bold', sans-serif;
-$t-font: 'Apercu Regular', sans-serif;
+$main-background: #fff;
+$h-font: 'Manrope Bold', sans-serif;
+$t-font: 'Manrope Regular', sans-serif;
 $accent-color: #BFC2F1;
-$hl-color: #f4b560;
+$hl-color: #EDB506;
+$hl2-color: #FD2E69;
 $h-color: #333333;
 $t-color: #5c5c5c;
-$t-size: 15px;
+$t-size: .8rem;
 
 html, body{
   background-color: $main-background;
@@ -29,6 +30,100 @@ html, body{
 
 .uk-dropdown{
   border-radius: 5px;
+}
+
+h2{
+  &.main-header{
+    letter-spacing: -0.05rem;
+    font-size: 3rem;
+    font-family: $h-font;
+    color: #fff;
+  }
+  &.normal-title{
+    font-size: 1.8rem;
+    font-family: $h-font;
+    letter-spacing: -0.05rem;
+  }
+}
+
+.desc{
+  color: #fff;
+}
+
+.uk-button{
+  &.normal{
+    background: $hl2-color;
+    color: #fff;
+
+    border-radius: 180px;
+    font-family: $t-font;
+    text-transform: capitalize;
+  }
+}
+
+.p-card{
+  box-shadow: 0px 4px 21px rgba(0,0,0,0.05);
+  background: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  .addtocart{
+    background-color: $hl2-color;
+    color: #fff;
+    border-radius: 180px;
+  }
+  h5,h4{
+    font-family: $t-font;
+    font-weight: 100;
+  }
+  h4{
+    font-size: .9rem;
+    letter-spacing: -0.05rem;
+  }
+  h5{
+    font-size: .6rem;
+  }
+  .oldprice{
+    color: #ababab;
+    font-size: .6rem;
+    line-height: 1rem;
+    text-decoration: line-through;
+  }
+  .price{
+    font-size: 1rem;
+    line-height: 1.1rem;
+    color: $hl2-color;
+    font-family: $t-font;
+  }
+  .dscto{
+    background-color: $hl2-color;
+    border-radius: 180px;
+    color: #fff;
+    font-family: $t-font;
+    font-size: .8rem;
+    padding: 7px 15px;
+  }
+}
+
+.c-card{
+  p{
+    color: #fff;
+    line-height: 1.2rem;
+    &.sub{
+      font-size: .7rem;
+      margin: 0;
+      line-height: .8rem;
+    }
+  }
+  h4{
+    color: #fff;
+    font-size: 1.3rem;
+    font-family: $h-font;
+    text-shadow: 0px 5px 5px rgba(0,0,0,0.05);
+  }
+}
+
+.swiper-container{
+  padding: 20px 0!important;
 }
 
 pre{
@@ -143,7 +238,7 @@ img[data-src][src*='data:image'] {
   z-index: 0;
   margin-top: -80px;
   .overlay{
-    background: linear-gradient(to top, rgba(242, 242, 242,1) 0%, rgba(242,242,242,0.9) 40% , rgba(242,242,242,0.9) 60% ,  rgba(242,242,242,0.9) 100% );
+    background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(242,242,242,0.9) 40% , rgba(242,242,242,0.9) 60% ,  rgba(242,242,242,0.9) 100% );
   }
 }
 
@@ -516,7 +611,7 @@ button.uk-button{
     }
     &.nav{
       padding: 10px 20px;
-      background: linear-gradient(to right,rgb(241, 241, 241) 0%, rgba(241, 241, 241,1) 40%,  rgba(241, 241, 241,0.9) 45%, rgba(241, 241, 241,0.8) 55%, transparent 100%);
+      background: linear-gradient(to right,rgb(255,255,255) 0%, rgba(241, 241, 241,1) 40%,  rgba(241, 241, 241,0.9) 45%, rgba(241, 241, 241,0.8) 55%, transparent 100%);
     }
   }
   .uk-button{
@@ -662,7 +757,30 @@ footer{
 
 }
 
-@media only screen and (max-width: 600px) {
+
+@media only screen and (max-width: 640px) {
+
+
+  h2{
+    &.main-header{
+      font-size: 1.8rem;
+    }
+  }
+
+  .p-card{
+    box-shadow: 0px 5px 10px rgba(0,0,0,0.05);
+    h4{
+      font-size: .75rem;
+    }
+    .uk-overlay{
+      padding: 10px;
+    }
+    .uk-margin{
+      margin-top: 10px!important;
+      margin-bottom: 10px;
+    }
+  }
+
   .link-container{
     padding: 10px 20px;
   }

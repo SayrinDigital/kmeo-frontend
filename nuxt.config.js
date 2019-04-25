@@ -33,14 +33,14 @@ module.exports = {
   /*
   ** Global CSS
   */
-    css: ['uikit/dist/css/uikit.css', '@/assets/style.scss'],
+    css: ['uikit/dist/css/uikit.css', '@/assets/style.scss' ,'swiper/dist/css/swiper.css'],
 
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
     { src: '~/plugins/uikit.js', ssr: false },{ src: '~/plugins/vue-filters.js', ssr: true },
-    { src: '~/plugins/localStorage.js', ssr: false }
+    { src: '~/plugins/localStorage.js', ssr: false },{src: '~/plugins/swiper.js', ssr: false }
     ],
 
   /*
