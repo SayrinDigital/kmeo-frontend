@@ -88,7 +88,7 @@
   </div>
 
   <div class="uk-position-center uk-position-fixed loader-logo">
-    <img ref="logo_loader" width="100px" src="/logo.svg" alt="">
+    <img ref="logo_loader" width="100px" src="/logopink.svg" alt="">
   </div>
 
 </div>
