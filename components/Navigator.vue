@@ -5,7 +5,7 @@
     <div class="uk-navbar-left">
       <div class="uk-navbar-item">
         <nuxt-link to="/">
-          <img uk-img width="80px" src="/logo.svg" />
+          <img uk-img width="70" src="/logopink.svg" />
         </nuxt-link>
       </div>
     </div>
@@ -111,7 +111,7 @@ export default {
     return {
       categories: [],
       headers: [],
-      baseUrl: "https://say.kmeo.cl",
+      baseUrl: "https://say.petschile.cl",
       interface: "",
       search: ""
     }

@@ -83,7 +83,7 @@
       },
        getOrder(id){
          axios
-            .post('https://flow.kmeo.cl/payments/getStatusByCommerceId.php',{
+            .post('https://flow.petschile.cl/payments/getStatusByCommerceId.php',{
                 orderId: id
             })
             .then(response => {
@@ -102,7 +102,7 @@
          console.log(status)
 
          axios
-            .put('https://say.kmeo.cl/ordens/' + id,{
+            .put('https://say.petschile.cl/ordens/' + id,{
                 estado: status
             })
             .then(response => {
@@ -124,7 +124,7 @@
        sendmail(id){
          var order = null
          axios
-         .get('https://say.kmeo.cl/ordens/' + id)
+         .get('https://say.petschile.cl/ordens/' + id)
          .then(response => {
            order = response.data
           this.sendNotify(order)
@@ -136,7 +136,7 @@
        },
        sendNotify(order){
             axios
-            .post('https://kmeo.cl/api/mail',{
+            .post('https://petschile.cl/api/mail',{
               email: order.email,
               nombre: order.nombre,
               id: order.id
@@ -150,7 +150,7 @@
             })
 
             axios
-            .post('https://kmeo.cl/api/notifyorder',{
+            .post('https://petschile.cl/api/notifyorder',{
               email: order.email,
               nombre: order.nombre,
               id: order.id,

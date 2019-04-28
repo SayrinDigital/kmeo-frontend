@@ -14,8 +14,8 @@
       <div class="uk-width-large" uk-dropdown>
         <div  >
           <h5 class="uk-margin">Nuestras Redes Sociales</h5>
-          <a href="https://www.instagram.com/kmeo.cl/" class="uk-icon-button uk-margin-small-right" uk-icon="instagram"></a>
-          <a href="https://www.facebook.com/kmeo.cl" class="uk-icon-button" uk-icon="facebook"></a>
+          <a href="https://www.instagram.com/petschile.cl/" class="uk-icon-button uk-margin-small-right" uk-icon="instagram"></a>
+          <a href="https://www.facebook.com/petschile.cl" class="uk-icon-button" uk-icon="facebook"></a>
         </div>
       </div>
     </div>

@@ -37,7 +37,7 @@
 
   </div>
 
-  
+
 
 </div>
 </template>
@@ -47,7 +47,7 @@ import { mapMutations } from 'vuex'
 export default {
   data(){
     return{
-      baseUrl: "https://say.kmeo.cl"
+      baseUrl: "https://say.petschile.cl"
     }
   },
   props: ['product'],

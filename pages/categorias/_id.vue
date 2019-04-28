@@ -54,7 +54,7 @@ export default {
     return {
       category: null,
       products: [],
-      baseUrl: "https://say.kmeo.cl",
+      baseUrl: "https://say.petschile.cl",
       id: null,
       brands: [],
       filterbrand: "Todas"
@@ -62,7 +62,7 @@ export default {
   },
   head () {
   return {
-    title: this.category.nombre + ' | Kmeo',
+    title: this.category.nombre + ' | Petschile',
     meta: [
       // hid is used as unique identifier. Do not use `vmid` for it as it will not work
       { hid: 'description', name: 'description', content: this.category.descripcion }

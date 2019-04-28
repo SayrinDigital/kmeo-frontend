@@ -59,7 +59,7 @@ app.all('/mail', (req, res, next) => {
   const mailOptions = {
     from: 'Área de Ventas Kmeo <joscri2698@gmail.com>',  // sender address
     to: req.body.email, // list of receivers
-    replyTo: 'ventas@kmeo.cl',
+    replyTo: 'ventas@petschile.cl',
     subject: 'Área de Ventas Kmeo', // Subject line
     html: '<div  style="padding: 20px; background-color: #fcfcfc;" class="main-container"><img style="margin-bottom: 20px;" class="logo" width="50" src="https://marketing-image-production.s3.amazonaws.com/uploads/cb6ac8ccd770bad21f9b6855716a1b5adc0c30125d4d72dfc1b2fe8ed1953ac21079b0c984378c9d43539155fbc996550a49c8fd69cea43270ccbf68bb632f77.png" /><div style="background: #fff;padding: 20px;border: 1px solid rgba(0,0,0,0.1);" class="container"><h2 style="font-family: Open Sans, sans-serif; font-weight: 300;">Área de Ventas Kmeo</h2><h3  style="font-family: Open Sans, sans-serif; font-weight: 300;">Estimado cliente:</h3><p  style="font-family: Open Sans, sans-serif; font-weight: 300;">Tu ID de compra es: ' + req.body.id + '</p><p  style="font-family: Open Sans, sans-serif; font-weight: 300;">Junto con saludar le informamos que hemos recibido la notificación de su compra, verificaremos el pago y nos pondremos en contacto con usted para la coordinación de la entrega del producto, cualquier otra duda que tenga, nos puede contactar también en nuestro WhatsApp +56 9 4163 9399 .</p><p  style="font-family: Open Sans, sans-serif; font-weight: 300;">Muchas gracias por su confianza y que tenga excelente día!</p><div style="text-align: center; margin-top: 60px;"><a href="https://kmeo.cl" style="background-color: #f4b560;color: #fff;font-family: Open Sans, sans-serif;font-weight: 300;text-decoration: none;padding: 10px 20px;border-radius: 10px;">Visítanos</a></div></div></div>'
   };
@@ -77,7 +77,7 @@ app.all('/notifyorder', (req, res, next) => {
 
   const msg = {
     to: 'ventas@kmeo.cl',
-    from: 'josepuma@kmeo.cl',
+    from: 'josepuma@petschile.cl',
     subject: 'Notificación de Pago',
     personalizations: [{
       to: [{

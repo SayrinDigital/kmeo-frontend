@@ -27,7 +27,7 @@ export const actions = {
   async getStatus({state, commit}, id) {
 
     if(state.orderId){
-      await this.$axios.post('https://kmeo.cl/flow/examples/payments/getStatusByCommerceId.php',{
+      await this.$axios.post('https://petschile.cl/flow/examples/payments/getStatusByCommerceId.php',{
           orderId: state.orderId
       })
         .then((res) => {

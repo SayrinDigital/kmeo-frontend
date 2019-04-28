@@ -13,7 +13,7 @@ module.exports = {
 
 
   head: {
-    title: 'Kmeo | Tienda Online',
+    title: 'Pets Chile | Tienda Online',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -57,13 +57,13 @@ module.exports = {
   ** Axios module configuration
   */
   axios: {
-    baseURL: 'https://say.kmeo.cl'
+    baseURL: 'https://say.petschile.cl'
     // See https://github.com/nuxt-community/axios-module#options
   },
 
   generate: {
     routes: function () {
-      return axios.get('https://say.kmeo.cl/categorias')
+      return axios.get('https://say.petschile.cl/categorias')
       .then((res) => {
         return res.data.map((categoria) => {
           return '/categorias/' + categoria.id

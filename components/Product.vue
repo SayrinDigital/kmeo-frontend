@@ -20,7 +20,7 @@
        <a @click="addProduct(product)" uk-tooltip="Agregar Al Carro" class="addtocart uk-button"><span class="uk-icon" uk-icon="cart"></span></a>
      </div>
      <div class="uk-position-top-right">
-       <div class="uk-overlay">
+       <div class="uk-margin-small-top uk-margin-small-right">
          <div class="dscto">{{ discountPercetange }} %</div>
        </div>
      </div>
@@ -95,7 +95,7 @@ import { TimelineLite } from 'gsap'
 export default {
   data(){
     return{
-      baseUrl: "https://say.kmeo.cl",
+      baseUrl: "https://say.petschile.cl",
       timeline: null,
       windowHeight: null
     }

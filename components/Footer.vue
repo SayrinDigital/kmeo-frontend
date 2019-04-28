@@ -6,7 +6,7 @@
         <div class="say-padding-left-container">
           <div class="uk-section">
             <div class="uk-container">
-              <h1>Kmeo Santiago</h1>
+              <h1>PetsChile</h1>
               <p class="uk-width-2-5@m uk-margin">{{ interface.piedescripcion }}</p>
             </div>
           </div>
@@ -15,8 +15,8 @@
       <div class="uk-width-1-5@m uk-text-center ">
         <div class="uk-section uk-text-center">
           <div>
-            <a href="https://www.instagram.com/kmeo.cl/" class="uk-icon-button uk-margin-small-right" uk-icon="instagram"></a>
-            <a href="https://www.facebook.com/kmeo.cl" class="uk-icon-button  uk-margin-small-right" uk-icon="facebook"></a>
+            <a href="https://www.instagram.com/petschile.cl/" class="uk-icon-button uk-margin-small-right" uk-icon="instagram"></a>
+            <a href="https://www.facebook.com/petschile.cl" class="uk-icon-button  uk-margin-small-right" uk-icon="facebook"></a>
 </div>
         </div>
       </div>

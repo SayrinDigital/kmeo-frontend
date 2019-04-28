@@ -140,7 +140,7 @@ export default {
 
   data(){
     return{
-      baseUrl : "https://say.kmeo.cl",
+      baseUrl : "https://say.petschile.cl",
       name: "",
       email: "",
       phone: "",
@@ -282,7 +282,7 @@ export default {
      var notification = "d-c427f97c2ab44c9c95a254b9cfdd5bf8"
      var order = null
      axios
-     .get('https://say.kmeo.cl/ordens/' + id)
+     .get('https://say.petschile.cl/ordens/' + id)
      .then(response => {
        order = response.data
 
@@ -345,7 +345,7 @@ export default {
       this.$store.commit('order/add', orderId)
 
       axios
-      .post('https://flow.kmeo.cl/payments/create.php',{
+      .post('https://flow.petschile.cl/payments/create.php',{
         orderId: orderId,
         email: this.email,
         total: totalprice,

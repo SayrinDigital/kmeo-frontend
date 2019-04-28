@@ -1,16 +1,18 @@
 <template>
 
   <div v-if="category.mostrar">
-    <div class="c-card uk-position-relative">
-      <img :src="baseUrl + category.imagen.url" alt="">
-      <div class="uk-position-center-left">
-        <div class="uk-overlay">
-          <p class="sub">Categorías</p>
-          <h4 class="uk-width-3-5@m">{{ category.nombre }}</h4>
-          <p class="uk-width-3-5@m uk-margin-small">Tenemos {{ category.producto.length }} productos en esta categoría.</p>
+    <nuxt-link tag="a" :to="{ name: 'categorias-id', params: { id: category.id }}" class="uk-display-block">
+      <div class="c-card uk-position-relative">
+        <img :src="baseUrl + category.imagen.url" alt="">
+        <div class="uk-position-center-left">
+          <div class="uk-overlay">
+            <p class="sub">Categorías</p>
+            <h4 class="uk-width-3-5@m">{{ category.nombre }}</h4>
+            <p class="uk-width-3-5@m uk-margin-small">Tenemos {{ category.producto.length }} productos en esta categoría.</p>
+          </div>
         </div>
       </div>
-    </div>
+    </nuxt-link>
       <!--<div>
         <div class="category-container">
           <div class="image-container uk-position-center-right uk-height-1-1 uk-width-3-5 uk-background-cover " :style="'background-image: url('+baseUrl + category.imagen.url+');'">
@@ -36,7 +38,7 @@ export default {
 
   data(){
     return{
-       baseUrl: 'https://say.kmeo.cl'
+       baseUrl: 'https://say.petschile.cl'
     }
   },
   props: ['category'],

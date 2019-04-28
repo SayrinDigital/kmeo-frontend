@@ -21,7 +21,7 @@
 export default {
   data(){
     return{
-       baseUrl: 'https://say.kmeo.cl'
+       baseUrl: 'https://say.petschile.cl'
     }
   },
   props: ['category']

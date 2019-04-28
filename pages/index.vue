@@ -105,7 +105,7 @@ import {
 export default {
   data() {
     return {
-      baseUrl: "https://say.kmeo.cl/",
+      baseUrl: "https://say.petschile.cl/",
       timeline: null,
       loadertl: null,
       swiperOption: {
