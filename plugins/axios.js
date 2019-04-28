@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export default axios.create({
-  baseURL: 'https://say.kmeo.cl'
+  baseURL: 'https://say.petschile.cl'
 })
 
 
