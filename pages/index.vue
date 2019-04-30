@@ -6,8 +6,9 @@
 
     <ul class="uk-slideshow-items">
        <li v-for="head in headers" :key="head.id">
-          <section v-if="head.imagen" class="uk-background-cover uk-section uk-section-large" :style="'background-image: url('+baseUrl + head.imagen.url+');'">
-            <div class="uk-container">
+          <section v-if="head.imagen" class="uk-background-cover uk-position-relative uk-section uk-section-large" :style="'background-image: url('+baseUrl + head.imagen.url+');'">
+                        <div class="overlay uk-position-cover"></div>
+            <div class="uk-container uk-position-relative">
               <h2 class="uk-width-large main-header">{{ head.titulo }}</h2>
               <p class="desc uk-width-large">{{ head.descripcion }}</p>
               <div class="uk-margin">
@@ -62,8 +63,9 @@
         <p class="uk-width-large@m">Encuentra las últimas tendencias que tenemos en nuestro stock.</p>
 
         <div class="uk-section product-section">
+
           <div class="uk-grid-small uk-grid uk-child-width-1-5@l uk-child-width-1-4@m uk-child-width-1-3@s uk-child-width-1-2 uk-grid-match" uk-grid>
-            <div v-if="product.mostrar" v-for="product in randomizedProducts" :key="product.id">
+            <div v-if="product.mostrar" v-for="product in products" :key="product.id">
               <Product :product="product"></Product>
             </div>
 
@@ -177,6 +179,11 @@ export default {
       return this.products.sort(function() {
         return 0.5 - Math.random()
       });
+    }
+  },
+  filters: {
+    shuffle(value){
+      return value.sort(() => Math.random() - 0.5);
     }
   },
   methods: {
@@ -293,6 +300,10 @@ export default {
         }
       }
     );
+
+    products.data.sort(function() {
+      return 0.5 - Math.random()
+    });
 
     const categories = await axios.get(
       '/categorias'

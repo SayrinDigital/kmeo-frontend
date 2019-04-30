@@ -1,8 +1,9 @@
 <template>
 
   <div v-if="category.mostrar">
-    <nuxt-link tag="a" :to="{ name: 'categorias-id', params: { id: category.id }}" class="uk-display-block">
+    <nuxt-link tag="a" :to="{ name: 'categorias-id', params: { id: category.id }}" class="uk-display-block uk-position-relative">
       <div class="c-card uk-position-relative">
+        <div class="overlay uk-position-cover"></div>
         <img :src="baseUrl + category.imagen.url" alt="">
         <div class="uk-position-center-left">
           <div class="uk-overlay">
