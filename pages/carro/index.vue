@@ -2,7 +2,7 @@
 
   <div >
 
-    <div  z-index="0" class="uk-position-relative uk-section uk-section-large category-header uk-background-cover" uk-img data-src="https://images.unsplash.com/photo-1484920274317-87885fcbc504?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80">
+    <div  z-index="0" class="uk-position-relative uk-section uk-section-large category-header uk-background-cover" uk-img data-src="https://images.unsplash.com/photo-1424709746721-b8fd0ff52499?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
      <div class="overlay uk-position-cover"></div>
      <div class="uk-section uk-section-small uk-position-relative">
        <div class="uk-container">

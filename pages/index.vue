@@ -2,7 +2,7 @@
 <div>
 
   <div>
-    <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="min-height: 350">
+    <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="min-height: 390; max-height: 590">
 
     <ul class="uk-slideshow-items">
        <li v-for="head in headers" :key="head.id">
@@ -25,22 +25,24 @@
 </div>
 
 
-    <section class="uk-section uk-background-cover" v-if="hlcategory">
-      <div class="uk-container">
-        <h2 class="normal-title">Destacados</h2>
-        <p class="uk-width-large@m">Productos más destacados por su oferta y basado en la búsqueda de nuestros clientes.</p>
-      </div>
-      <div class="uk-margin">
-        <div v-swiper:mySwiper="swiperOption">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide" v-if="product.mostrar" v-for="product in hlcategory.producto" :key="product.id">
-                <Product :product="product"></Product>
-            </div>
-          </div>
-
+    <div v-if="hlcategory">
+      <section class="uk-section uk-background-cover" v-if="hlcategory.product">
+        <div class="uk-container">
+          <h2 class="normal-title">Destacados</h2>
+          <p class="uk-width-large@m">Productos más destacados por su oferta y basado en la búsqueda de nuestros clientes.</p>
         </div>
-      </div>
-    </section>
+        <div class="uk-margin">
+          <div v-swiper:mySwiper="swiperOption">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide" v-if="product.mostrar" v-for="product in hlcategory.producto" :key="product.id">
+                  <Product :product="product"></Product>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </div>
 
     <section class="uk-section">
       <div class="uk-container">
